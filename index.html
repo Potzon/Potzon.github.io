@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gotzon Viteri · Ingeniero de IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E8EDF1;--surface:#F6F8FA;--ink:#14202B;--mute:#53636F;--line:#C4CFD7;
+  --ria:#0E6B76;--alert:#D9411E;
+  --c-vis:#0E6B76;--c-ml:#3B4FA3;--c-nlp:#8A5A12;--c-edge:#B23A6E;--c-sw:#5C6B2E;--c-data:#7A3FB0;
+  --display:'Bricolage Grotesque','Helvetica Neue',Arial,sans-serif;
+  --body:'Instrument Sans','Helvetica Neue',Arial,sans-serif;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F1820;--surface:#16222C;--ink:#E6EDF2;--mute:#9AABB8;--line:#2B3C49;
+  --ria:#4FC2CE;--alert:#FF7A57;
+  --c-vis:#4FC2CE;--c-ml:#8EA2FF;--c-nlp:#E0A94F;--c-edge:#F27CAE;--c-sw:#B4C768;--c-data:#C49BFF;}}
+:root[data-theme="dark"]{
+  --bg:#0F1820;--surface:#16222C;--ink:#E6EDF2;--mute:#9AABB8;--line:#2B3C49;
+  --ria:#4FC2CE;--alert:#FF7A57;
+  --c-vis:#4FC2CE;--c-ml:#8EA2FF;--c-nlp:#E0A94F;--c-edge:#F27CAE;--c-sw:#B4C768;--c-data:#C49BFF;}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--body)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ria);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 clamp(1.1rem,4vw,2.5rem)}
+nav{display:flex;gap:1.4rem;flex-wrap:wrap;padding:1.4rem 0;font-weight:500;font-size:.95rem}
+nav a{text-decoration:none;color:var(--mute)}nav a:hover{color:var(--ink)}
+nav .me{margin-right:auto;color:var(--ink);font-weight:600}
+h1,h2,h3{font-family:var(--display);line-height:1.05;margin:0;letter-spacing:-.02em}
+h1{font-size:clamp(3.2rem,11vw,8rem);font-weight:800;letter-spacing:-.045em;margin-top:clamp(1.5rem,5vw,4rem)}
+h2{font-size:clamp(1.9rem,4.5vw,3rem);font-weight:800;margin-bottom:1.6rem}
+.lede{font-size:clamp(1.15rem,2.2vw,1.5rem);max-width:34em;margin:1.2rem 0 0;line-height:1.4}
+.lede b{font-weight:600}
+.signal{position:relative;margin:2.2rem 0 .6rem;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.signal svg{display:block;width:100%;height:auto}
+.signal .base{stroke:var(--line);stroke-width:1;stroke-dasharray:3 6}
+.signal .wave{fill:none;stroke:var(--ria);stroke-width:2.2;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:0}
+.flag{position:absolute;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;border:2px solid var(--alert);background:transparent;cursor:pointer;padding:0;color:var(--alert);opacity:1}
+.flag::after{content:"";position:absolute;inset:11px;border-radius:50%;background:var(--alert)}
+.tip{position:absolute;left:50%;bottom:52px;transform:translateX(-50%);width:15rem;background:var(--ink);color:var(--bg);padding:.7rem .9rem;border-radius:8px;font-size:.88rem;line-height:1.4;text-align:left;opacity:0;pointer-events:none;transition:opacity .15s}
+.flag:hover .tip,.flag:focus-visible .tip,.flag.open .tip{opacity:1}
+.cap{color:var(--mute);font-size:.9rem;margin:0 0 3rem;max-width:44em}
+@media (prefers-reduced-motion:no-preference){
+  .wave{animation:draw 2.4s cubic-bezier(.5,0,.2,1) both}
+  .flag{animation:pop .5s 2.2s both}
+  @keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+  @keyframes pop{from{opacity:0;transform:translate(-50%,-50%) scale(.3)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+}
+section{padding:clamp(2.5rem,7vw,5rem) 0;border-top:1px solid var(--line)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,3rem)}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+.job h3{font-size:1.5rem;font-weight:600}
+#experiencia .job{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.5rem 1.5rem 1.7rem}
+.job h3.cur{padding-right:5rem}
+.live{position:absolute;top:1.5rem;right:1.5rem;display:flex;align-items:center;gap:.45rem;font-size:.85rem;font-weight:500;color:var(--mute)}
+.live i{width:9px;height:9px;border-radius:50%;background:#2BB673}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(43,182,115,.55)}70%,100%{box-shadow:0 0 0 8px rgba(43,182,115,0)}}
+@media (prefers-reduced-motion:no-preference){.live i{animation:pulse 2s infinite}}
+.job .where{color:var(--mute);margin:.3rem 0 .8rem;font-size:.95rem}
+.job .co{color:var(--ink);font-weight:500}
+.job p,.job li{max-width:34em}
+.job ul{padding-left:1.1rem;margin:.5rem 0 0}.job li{margin-bottom:.5rem}
+.filters{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.chip{font:500 .92rem var(--body);padding:.45rem .9rem;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.proj{border-top:1px solid var(--line)}
+.proj:last-child{border-bottom:1px solid var(--line)}
+.proj>button{all:unset;box-sizing:border-box;display:grid;grid-template-columns:9.5rem 1fr auto;gap:1rem;align-items:baseline;width:100%;padding:1.1rem .2rem;cursor:pointer}
+.proj>button:focus-visible{outline:3px solid var(--ria);outline-offset:-3px}
+.proj .date{color:var(--mute);font-size:.9rem}
+.proj h3{font-size:1.35rem;font-weight:600}
+.proj .sum{display:block;color:var(--mute);font-size:.98rem;margin-top:.25rem;max-width:40em}
+.dot{display:inline-block;width:.6rem;height:.6rem;border-radius:50%;margin-right:.5rem;background:var(--cc)}
+.plus{font-size:1.4rem;transition:transform .2s;color:var(--mute)}
+.proj.open .plus{transform:rotate(45deg)}
+.more{display:grid;grid-template-rows:0fr;max-width:56rem;margin-left:calc(9.5rem + 1rem)}
+.more .in{min-height:0;overflow:hidden;visibility:hidden}
+.more .in>a{display:inline-block;margin-bottom:1.4rem}
+.proj.open .more{grid-template-rows:1fr}
+.proj.open .more .in{visibility:visible}
+.more p{margin:0 0 .8rem;max-width:40em}
+.more a{font-weight:600;color:var(--ria)}
+@media(max-width:700px){.proj>button{grid-template-columns:1fr auto}.proj .date{grid-column:1/-1}.more{margin-left:.2rem}}
+.tl{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1rem}
+.tl svg{display:block;min-width:720px;width:100%;height:auto}
+.tl text{font:500 12px var(--body);fill:var(--mute)}
+.tl text.lab{fill:var(--ink)}
+.tl line{stroke:var(--line)}
+.legend{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:.9rem;color:var(--mute);font-size:.9rem}
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+@media(max-width:760px){.skills{grid-template-columns:1fr}}
+.skills h3{font-size:1.1rem;font-weight:600;margin-bottom:.5rem}
+.skills p{margin:0;color:var(--mute)}
+.skills>div{--g:var(--c-ml);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.2rem 1.2rem 1.4rem}
+.skills>div:nth-child(2){--g:var(--c-vis)}
+.skills>div:nth-child(3){--g:var(--c-edge)}
+.skills h3{display:flex;align-items:center;gap:.6rem;margin:0;padding-bottom:.9rem;border-bottom:2px solid var(--g)}
+.skills h3 svg{width:22px;height:22px;flex:none;fill:none;stroke:var(--g);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.skills h3 .n{margin-left:auto;font:600 .8rem var(--body);color:var(--mute)}
+.tags{list-style:none;margin:1rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.5rem}
+.tags li{display:flex;align-items:center;gap:.5rem;padding:.3rem .8rem .3rem .3rem;border:1px solid var(--line);border-radius:999px;font-size:.92rem;background:var(--bg)}
+.tags li:hover{border-color:var(--g)}
+.mono{min-width:2rem;height:1.6rem;padding:0 .4rem;display:grid;place-items:center;border-radius:999px;background:color-mix(in srgb,var(--g) 18%,transparent);color:var(--g);font:700 .72rem var(--display)}
+.skills[hidden]{display:none}
+.flowt{font-size:1.4rem;font-weight:600}
+.flowp{color:var(--mute);margin:.3rem 0 2rem;max-width:36em}
+.stages{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;position:relative}
+.stages::before,.stages::after{content:"";position:absolute;left:20px;right:calc((100% - 3.6rem)/4 - 20px);top:19px;height:2px;background:var(--line)}
+.stages::after{background:var(--ria);transform-origin:left}
+.stages li{--g:var(--c-vis)}.stages li:nth-child(2){--g:var(--c-ml)}.stages li:nth-child(3){--g:var(--c-edge)}.stages li:nth-child(4){--g:var(--c-sw)}
+.node{position:relative;z-index:1;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--bg);border:2px solid var(--g);font:800 1rem var(--display)}
+.stages h4{font:800 1.25rem var(--display);letter-spacing:-.01em;margin:.9rem 0 0}
+.stages .st{margin:.15rem 0 0;color:var(--mute);font-size:.92rem}
+.stages .tags{margin-top:.9rem}
+.bus{--g:var(--c-nlp);margin-top:2.4rem;padding:1rem 1.2rem;border:1px dashed var(--line);border-radius:12px;display:flex;flex-wrap:wrap;align-items:center;gap:.7rem 1.3rem}
+.busl{font:600 1rem var(--display)}.bus .tags{margin:0}
+@media(max-width:760px){
+  .stages{grid-template-columns:1fr;gap:1.6rem}
+  .stages::before,.stages::after{display:none}
+  .stages li{position:relative;padding-left:3.4rem}
+  .stages .node{position:absolute;left:0;top:0}
+  .stages li:not(:last-child)::before{content:"";position:absolute;left:19px;top:44px;bottom:-1.6rem;width:2px;background:var(--line)}
+  .stages h4{margin-top:0}
+}
+@media (prefers-reduced-motion:no-preference){.stages::after{transition:transform 1.5s cubic-bezier(.5,0,.2,1)}.flow.pre .stages::after{transform:scaleX(0)}}
+@media (prefers-reduced-motion:no-preference){.tags li{transition:transform .15s,border-color .15s}.tags li:hover{transform:translateY(-2px)}}
+.list{margin:0;padding:0;list-style:none}.list li{padding:.55rem 0;border-top:1px solid var(--line)}
+footer{padding:clamp(3rem,8vw,6rem) 0 3rem;border-top:1px solid var(--line)}
+footer h2{font-size:clamp(2.2rem,7vw,5rem)}
+.links{display:flex;gap:1.5rem;flex-wrap:wrap;font-weight:600;font-size:1.1rem;margin-top:1.4rem}
+.links a{text-decoration-thickness:2px;text-underline-offset:5px;text-decoration-color:var(--ria)}
+small{display:block;color:var(--mute);margin-top:3rem}
+.ctl{display:flex;gap:.4rem;align-items:center}.ctl .chip{padding:.3rem .7rem;font-size:.85rem}
+.sw{all:unset;box-sizing:border-box;position:relative;width:54px;height:30px;margin-left:.5rem;border-radius:999px;background:var(--line);cursor:pointer}
+.sw[aria-checked="true"]{background:var(--ria)}
+.sw:focus-visible{outline:3px solid var(--ria);outline-offset:3px}
+.sw .knob{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;color:#14202B;display:grid;place-items:center;box-shadow:0 1px 3px rgba(0,0,0,.35)}
+.sw.ready{transition:background .2s}
+.sw.ready .knob{transition:transform .2s}
+.sw[aria-checked="true"] .knob{transform:translateX(24px)}
+.sw svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.sw .moon,.sw[aria-checked="true"] .sun{display:none}
+.sw[aria-checked="true"] .moon{display:block}
+nav a:not(.me){position:relative}
+nav a:not(.me)::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;background:var(--ria);transform:scaleX(0);transform-origin:left}
+nav a:hover::after,nav a.on::after{transform:scaleX(1)}
+nav a.on{color:var(--ink)}
+.proj>button:hover{background:color-mix(in srgb,var(--ink) 5%,transparent)}
+.chip:hover{border-color:var(--ink)}
+.links a:hover,.more a:hover{color:var(--ria)}
+.tl svg:hover rect{opacity:.35}.tl svg rect:hover{opacity:1}
+@media (prefers-reduced-motion:no-preference){
+  .more{transition:grid-template-rows .32s ease}
+  .more .in{transition:visibility 0s .32s}
+  .proj.open .more .in{transition-delay:0s}
+  .proj>button{transition:background .2s}
+  .proj h3{transition:transform .2s}
+  .proj>button:hover h3{transform:translateX(6px)}
+  .proj>button:active{transform:scale(.995)}
+  .chip{transition:background .15s,color .15s,border-color .15s,transform .12s}
+  .chip:active{transform:scale(.93)}
+  nav a:not(.me)::after{transition:transform .25s ease}
+  nav a{transition:color .2s}
+  .links a{transition:color .2s}
+  .proj.enter{animation:itemIn .35s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes itemIn{from{opacity:0;transform:translateY(10px)}}
+  .tl rect{transform-box:fill-box;transform-origin:left;transition:opacity .2s,transform .6s cubic-bezier(.2,.7,.2,1)}
+  .tl.pre rect{transform:scaleX(0)}
+  .wrap.fade{animation:fadeIn .3s ease}
+  @keyframes fadeIn{from{opacity:.25}}
+  html.theming *:not(.sw):not(.knob){transition:background-color .35s,color .35s,border-color .35s,fill .35s,stroke .35s!important}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav aria-label="Principal">
+    <a class="me" href="#top">Gotzon Viteri</a>
+    <a href="#experiencia">Experiencia</a><a href="#proyectos">Proyectos</a><a href="#formacion">Formación</a><a href="#contacto">Contacto</a>
+    <span class="ctl"><button class="chip" data-lang="es" lang="es" aria-label="Español">ES</button><button class="chip" data-lang="en" lang="en" aria-label="English">EN</button><button class="sw" id="themeBtn" role="switch" aria-checked="false"></button></span>
+  </nav>
+
+  <header id="top">
+    <h1>Gotzon Viteri</h1>
+    <p class="lede">Ingeniero de IA en Bilbao. Construyo sistemas de percepción y aprendizaje automático que funcionan <b>en el borde</b>: sensores reales, hardware limitado y resultados medibles.</p>
+
+    <div class="signal" id="signal">
+      <svg viewBox="0 0 1000 220" preserveAspectRatio="none" role="img" aria-label="Señal de un sensor con una anomalía detectada">
+        <line class="base" x1="0" y1="110" x2="1000" y2="110"/>
+        <path class="wave" id="wave" pathLength="1" vector-effect="non-scaling-stroke"/>
+      </svg>
+      <button class="flag" id="flag" aria-label="Anomalía detectada: ver detalle">
+        <span class="tip">Anomalía detectada. En IKERLAN entrené un detector no supervisado para un sensor LiDAR fijo: AUC 0,97 sobre más de 2.600 fotogramas.</span>
+      </button>
+    </div>
+    <p class="cap">Una señal con ruido y un pico que no debería estar ahí: el tipo de problema en el que trabajo. Pulsa el punto rojo.</p>
+  </header>
+
+  <section id="experiencia">
+    <h2>Experiencia</h2>
+    <div class="two">
+      <article class="job">
+        <span class="live"><i></i>Activo</span>
+        <h3 class="cur">Prácticas de investigación en ML</h3>
+        <p class="where"><span class="co">IKERLAN, Mondragón</span><br>junio 2026 – actualidad</p>
+        <p>Percepción e IA en el borde para sistemas ferroviarios autónomos.</p>
+        <ul>
+          <li>Diseñé una capa de tolerancia a fallos para un sistema de detección de obstáculos en tiempo real con RGB, térmica y LiDAR (ROS 2 Humble, Python/C++) sobre una Jetson AGX Orin.</li>
+          <li>Construí y desplegué un detector de anomalías no supervisado para un LiDAR fijo, con proyecciones 3D y 2D, sustracción de fondo y modelos de deep learning. AUC 0,97 en más de 2.600 fotogramas.</li>
+        </ul>
+      </article>
+      <article class="job">
+        <h3>Ingeniero de IA</h3>
+        <p class="where"><span class="co">Universidad de Deusto, Comisión de Inteligencia Artificial</span><br>septiembre 2025 – julio 2026</p>
+        <p>Desarrollé una plataforma de IA conversacional y RAG que ofrece materiales de curso, tutoría personalizada y ejercicios de repaso a más de 12.000 estudiantes.</p>
+        <ul>
+          <li>Admite varios LLM, skills e interacción multimodal.</li>
+          <li>Desplegada con Docker y AWS.</li>
+          <li><a href="https://github.com/iaud-tech/boti-open-webui">Código en GitHub</a></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="proyectos">
+    <h2>Proyectos</h2>
+    <div class="filters" id="filters" role="group" aria-label="Filtrar proyectos"></div>
+    <div id="list"></div>
+
+    <h3 style="font-size:1.4rem;font-weight:600;margin:3.5rem 0 1rem">Cronología</h3>
+    <div class="tl"><svg id="tl" role="img" aria-label="Cronología de proyectos de 2023 a 2026"></svg></div>
+    <div class="legend" id="legend"></div>
+  </section>
+
+  <section id="formacion">
+    <h2>Formación y habilidades</h2>
+    <div class="two" style="margin-bottom:3rem">
+      <div class="job">
+        <h3>Doble grado en Ingeniería Informática y Ciencia de Datos e IA</h3>
+        <p class="where">Universidad de Deusto · 2022 – 2027 (previsto)</p>
+        <p>Aprendizaje automático avanzado, deep learning, aprendizaje por refuerzo, optimización, estadística avanzada y arquitectura del software.</p>
+        <p>Trabajos de fin de grado: un sistema de percepción en el borde tolerante a fallos con ROS 2 y la detección no supervisada de obstáculos con LiDAR.</p>
+      </div>
+      <div>
+        <h3 style="font-size:1.5rem;font-weight:600;margin-bottom:.6rem">Certificaciones y reconocimientos</h3>
+        <ul class="list">
+          <li>AWS Educate Machine Learning Foundations · enero 2026</li>
+          <li>Finalista, IKERLAN CTF 2025</li>
+          <li>Participante, HackUPC 2026</li>
+          <li>Miembro del comité organizador de 0xDecode, el club de ingeniería de la Universidad de Deusto</li>
+        </ul>
+      </div>
+    </div>
+    <div class="flow" id="flow">
+      <h3 class="flowt">Del sensor al servicio</h3>
+      <p class="flowp">Mi stack, ordenado por el lugar que ocupa en un sistema de IA aplicada.</p>
+      <ol class="stages">
+        <li><span class="node">1</span><h4>Captura</h4><p class="st">Sensores y percepción</p><ul class="tags" data-t="ROS 2,OpenCV,NVIDIA JetPack"></ul></li>
+        <li><span class="node">2</span><h4>Modelado</h4><p class="st">Entrenar y evaluar</p><ul class="tags" data-t="PyTorch,TensorFlow,Transformers,Scikit-Learn,NumPy,Pandas"></ul></li>
+        <li><span class="node">3</span><h4>Despliegue</h4><p class="st">Del portátil al dispositivo</p><ul class="tags" data-t="TensorRT,Docker,AWS"></ul></li>
+        <li><span class="node">4</span><h4>Seguimiento</h4><p class="st">Medir y versionar</p><ul class="tags" data-t="Grafana,Weights & Biases,Jupyter,Git"></ul></li>
+      </ol>
+      <div class="bus"><span class="busl">Lenguajes de base</span><ul class="tags" data-t="Python,C/C++,SQL,Bash,Java,LaTeX"></ul></div>
+    </div>
+    <div class="skills" hidden>
+      <div><h3>Frameworks</h3><p>PyTorch, Transformers, TensorFlow, TensorRT, ROS 2, OpenCV, Scikit-Learn, NumPy, Pandas</p></div>
+      <div><h3>Lenguajes</h3><p>Python, C/C++, SQL, Bash, Java, LaTeX</p></div>
+      <div><h3>Herramientas</h3><p>NVIDIA JetPack, Docker, AWS, Git, Grafana, Weights &amp; Biases, Jupyter</p></div>
+    </div>
+  </section>
+
+  <footer id="contacto">
+    <h2>Hablemos</h2>
+    <p class="lede" style="margin-top:0">Estoy abierto a prácticas, investigación y proyectos de IA aplicada.</p>
+    <div class="links">
+      <a href="mailto:gotzonviteri@gmail.com">gotzonviteri@gmail.com</a>
+      <a href="https://linkedin.com/in/gotzonviteri">LinkedIn</a>
+      <a href="https://github.com/Potzon">GitHub</a>
+    </div>
+    <small>Bilbao, España</small>
+  </footer>
+</div>
+
+<script>
+var CATS={vis:'Visión',ml:'Aprendizaje automático',nlp:'Lenguaje',edge:'Edge e IoT',sw:'Software',data:'Big Data'};
+var P=[
+{n:'PRISM, generación de imágenes con difusión',c:'ml',d:'Sep – Nov 2026 (en curso)',s:[2026,9,2026,11],sum:'Réplica de DDPM, DDIM y classifier-free guidance para sintetizar imágenes desde ruido puro.',t:'Proyecto de investigación que replica tres artículos fundacionales de modelos de difusión (DDPM, DDIM y CFG) sobre MNIST y CIFAR-10 con arquitectura U-Net: denoising progresivo de ruido a imagen, muestreo determinista con DDIM y control condicional por clase mediante guidance. Evalúa la calidad generativa con FID/IS frente a los resultados publicados (mejor FID 36,04 en CIFAR-10 con CFG w=2), con tracking en Weights & Biases, semillas y dependencias fijadas para reproducibilidad, y una web app que visualiza el proceso de generación (ruido → estados intermedios → imagen final) comparando DDPM y DDIM lado a lado.',r:'josuviteri/PRISM'},
+{n:'EcoNest',c:'edge',d:'Nov 2026 – en curso',s:[2026,11,2026,11],sum:'Sistema IoT de extremo a extremo para monitorizar la fauna de los parques públicos de Bilbao.',t:'Plataforma que combina Raspberry Pi 5 con cámaras y detección de aves (YOLO11n) en el borde, comunicaciones MQTT locales y un backend FastAPI + PostgreSQL + Grafana para registrar y visualizar detecciones de palomas, ayudar a controlar la sobrepoblación y exponer los datos a ciudadanos y ayuntamiento mediante una API REST documentada.',r:'Potzon/EcoNest'},
+{n:'Detección de tanques de petróleo',c:'vis',d:'Sep 2026',s:[2026,9,2026,9],sum:'OpenCV clásico frente a YOLOv8: detección de tanques de petróleo en imágenes de satélite.',t:'Comparación rigurosa de 7 técnicas deterministas (Hough, blob detector, watershed, DoG…) frente a una YOLOv8n con fine-tuning sobre el dataset Airbus Oil Storage, con el mismo protocolo de evaluación. Conclusión: el techo clásico queda en F1 ≈ 0,35 frente a 0,843 de la CNN.',r:'Potzon/oil_storage_detection_airbus'},
+{n:'BOTI',c:'nlp',d:'Sep 2025 – Jul 2026',s:[2025,9,2026,7],sum:'Plataforma de IA conversacional y RAG que ofrece materiales de curso, tutoría personalizada y ejercicios de repaso a más de 12.000 estudiantes universitarios.',t:'Admite varios LLM, skills e interacción multimodal, y está desplegada con Docker y AWS.',r:'iaud-tech/boti-open-webui'},
+{n:'WATT, predicción de mercados energéticos',c:'ml',d:'Mar – May 2026',s:[2026,3,2026,5],sum:'Series temporales multivariantes del mercado eléctrico español con Transformers.',t:'Investigación sobre 4 años de datos de consumo, generación, precios y meteorología de la red eléctrica española. Evoluciona desde SARIMAX y ensembles de árboles hasta Temporal Fusion Transformers, Chronos y TimesFM, con regresión cuantil para pronósticos probabilísticos, SMOGN para picos de precio y validación walk-forward. Resultado: 5,3 % de MAPE horario y 4,4 % diario.',r:'Potzon/WATT'},
+{n:'Atmo-Ensemble',c:'ml',d:'Feb – Mar 2026',s:[2026,2,2026,3],sum:'Modelos ensemble para clasificar la calidad del aire, optimizados para edge computing.',t:'Estudio comparativo de estrategias de ensemble learning (bagging frente a boosting, SMOTE/RUSBoost, métodos ordinales de Frank & Hall, aprendizaje semisupervisado) sobre un dataset de contaminación, evaluando el compromiso entre precisión y eficiencia (tiempo de inferencia y tamaño del modelo) para sensores de bajo consumo, con SHAP para la explicabilidad.',r:'josuviteri/Atmo-Ensemble'},
+{n:'NASA Bearing RUL',c:'ml',d:'Nov 2025 – Ene 2026',s:[2025,11,2026,1],sum:'Vida útil restante de rodamientos con ML clásico y deep learning, servida por API.',t:'Pipeline completo sobre el dataset IMS Rexnord: EDA, extracción de características temporales, etiquetado de RUL y comparación de SVR, Random Forest y LightGBM frente a CNN 1D (onda cruda) y 2D (espectrogramas). Incluye una app interactiva en Streamlit y un servicio de inferencia REST con BentoML.',r:'josuviteri/NASA_bearing_RUL'},
+{n:'Clinic Note NLP',c:'nlp',d:'Oct 2025 – Feb 2026',s:[2025,10,2026,2],sum:'Clasificación y resumen automático de diálogos médico-paciente con transformers.',t:'Proyecto de NLP sobre los datasets MEDIQA-Chat/Sum 2023 que convierte conversaciones clínicas en notas estructuradas. Compara TF-IDF + ML clásico, CNN con Clinical-BERT, Bi-LSTM y DistilBERT para clasificar secciones, y T5-small para resumir (ROUGE, BERTScore), con estrategias para GPU limitada (FP16, gradient accumulation). Desplegado en un chatbot generativo.',r:'josuviteri/Clinic-Note-NLP'},
+{n:'OCT Retina Pathology Detection',c:'vis',d:'Oct – Dic 2025',s:[2025,10,2025,12],sum:'Detección de patologías de la interfase vítreo-macular en imágenes OCT de retina.',t:'Proyecto de Fundamentos de Visión por Computador que clasifica tomografías de coherencia óptica entre retina sana y tracción vítreo-macular (VMT), aplicando técnicas de visión por computador sobre imágenes reales del dataset de Mendeley.',r:'Potzon/oct-retina-pathology-detection'},
+{n:'RL adversarial multiagente (Unity ML-Agents)',c:'ml',d:'Sep 2025 – Ene 2026',s:[2025,9,2026,1],sum:'Entorno depredador-presa entrenado con aprendizaje por refuerzo.',t:'Simulación en Unity ML-Agents donde una araña (depredador) persigue a un gusano (presa), ambos entrenados con POLA/PPO en configuraciones individuales y duales. Admite entrenamiento headless con builds standalone, checkpoints y modelos ONNX para inferencia.',r:'Potzon/RL-Adversarial-Multi-Agent-Unity-Lab'},
+{n:'AWS Hadoop Cluster',c:'data',d:'May 2025',s:[2025,5,2025,5],sum:'Procesamiento distribuido de transacciones retail con PySpark: limpieza, consultas analíticas batch y streaming en tiempo real.',t:'Proyecto en equipo sobre un dataset de transacciones de retail: limpieza y preparación de datos con PySpark, 7 consultas analíticas por lotes (tendencias estacionales por producto, transacciones únicas aproximadas…) ejecutadas sobre un clúster Hadoop/HDFS, y 5 consultas de streaming con Spark Structured Streaming (agregaciones por ventanas sobre flujos JSON en tiempo real), con el análisis de los resultados en notebooks.',r:'iker-dominguez/TGVD_Teamwork'},
+{n:'Bank Churn Prediction',c:'ml',d:'Oct – Dic 2024',s:[2024,10,2024,12],sum:'Predicción de fuga de clientes bancarios con modelos interpretables.',t:'Análisis de 10.000 clientes de Kaggle con EDA, feature engineering y comparación de clasificadores (Random Forest como mejor modelo, recall ≈ 70 %, ROC-AUC ≈ 82 %), más regresión, clustering y explicabilidad con SHAP, PDP y ALE para traducir el modelo en estrategias de retención.',r:'MateoPerezSuarez/Bank-Churn-Project'},
+{n:'VerseVault',c:'sw',d:'Feb – May 2024',s:[2024,2,2024,5],sum:'App cliente-servidor en C++ para explorar y leer libros con protocolo propio.',t:'Biblioteca digital con arquitectura cliente-servidor sobre sockets TCP, protocolo de aplicación propio, base de datos SQLite (búsqueda por géneros, países, clientes y progreso de lectura) y descarga de libros con cURL, con menús interactivos por terminal.',r:'josuviteri/VerseVault'},
+{n:'madChess',c:'sw',d:'Oct 2023 – Mar 2024',s:[2023,10,2024,3],sum:'Ajedrez con reglas locas: partida local u online contra bot, en 1v1 o 2v2.',t:'Dos modos: clásico, con las reglas tradicionales, y madChess, donde cada jugador elige 3 piezas «alter» (movimientos y capturas modificados) y 3 «boosts» (hielo, bombas, minas, control…) que alteran la partida de forma dinámica.',r:'hjasier/madChess'}
+];
+var cur='all',list=document.getElementById('list'),fil=document.getElementById('filters');
+function esc(s){return s}
+function renderFilters(){
+  var all=[['all','Todos']].concat(Object.keys(CATS).map(function(k){return[k,CATS[k]]}));
+  fil.innerHTML='';
+  all.forEach(function(a){
+    var b=document.createElement('button');b.className='chip';b.textContent=a[1];
+    b.setAttribute('aria-pressed',cur===a[0]);
+    b.onclick=function(){cur=a[0];renderFilters();renderList()};
+    fil.appendChild(b);
+  });
+}
+function renderList(){
+  list.innerHTML='';
+  P.filter(function(p){return cur==='all'||p.c===cur}).forEach(function(p,i){
+    var d=document.createElement('div');d.className='proj';
+    d.style.setProperty('--cc','var(--c-'+p.c+')');
+    var id='p'+i;
+    d.innerHTML='<button aria-expanded="false" aria-controls="'+id+'"><span class="date">'+p.d+'</span><span><h3><span class="dot"></span>'+p.n+'</h3><span class="sum">'+p.sum+'</span></span><span class="plus" aria-hidden="true">+</span></button><div class="more" id="'+id+'"><p>'+p.t+'</p><a href="https://github.com/'+p.r+'">Ver repositorio en GitHub</a></div>';
+    var b=d.firstChild;
+    b.onclick=function(){var o=d.classList.toggle('open');b.setAttribute('aria-expanded',o)};
+    list.appendChild(d);
+  });
+}
+renderFilters();renderList();
+
+/* Cronología */
+(function(){
+  var D=P.filter(function(p){return p.s}).sort(function(a,b){return a.s[0]*12+a.s[1]-b.s[0]*12-b.s[1]});
+  var W=900,L=250,rowH=30,top=26,H=top+D.length*rowH+10,m0=2023*12+9,m1=2026*12+12,span=m1-m0;
+  function x(m){return L+(m-m0)/span*(W-L-10)}
+  var o='';
+  [2024,2025,2026].forEach(function(y){var xx=x(y*12+1);o+='<line x1="'+xx+'" x2="'+xx+'" y1="'+(top-8)+'" y2="'+H+'"/><text x="'+(xx+4)+'" y="14">'+y+'</text>'});
+  D.forEach(function(p,i){
+    var a=p.s[0]*12+p.s[1]-1,b=p.s[2]*12+p.s[3];
+    var y=top+i*rowH;
+    o+='<text class="lab" x="0" y="'+(y+14)+'">'+p.n.split(',')[0].replace(/ \(.*/,'')+'</text>';
+    o+='<rect x="'+x(a)+'" y="'+(y+3)+'" width="'+Math.max(x(b)-x(a),7)+'" height="16" rx="4" fill="var(--c-'+p.c+')"><title>'+p.n+': '+p.d+'</title></rect>';
+  });
+  var s=document.getElementById('tl');s.setAttribute('viewBox','0 0 '+W+' '+H);s.innerHTML=o;
+  document.getElementById('legend').innerHTML=Object.keys(CATS).map(function(k){return '<span><span class="dot" style="background:var(--c-'+k+')"></span>'+CATS[k]+'</span>'}).join('');
+})();
+
+/* Señal con anomalía */
+(function(){
+  var n=240,seed=7;function r(){seed=(seed*16807)%2147483647;return seed/2147483647-.5}
+  var pts=[],AN=174,ay=0;
+  for(var i=0;i<n;i++){
+    var x=i/(n-1)*1000,y=110+28*Math.sin(i*.09)+12*Math.sin(i*.31)+r()*10;
+    if(Math.abs(i-AN)<=2){y-=[18,62,88,52,16][i-AN+2];}
+    if(i===AN)ay=y;
+    pts.push((i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1));
+  }
+  document.getElementById('wave').setAttribute('d',pts.join(' '));
+  var f=document.getElementById('flag');
+  f.style.left=(AN/(n-1)*100)+'%';f.style.top=(ay/220*100)+'%';
+  f.addEventListener('click',function(){f.classList.toggle('open')});
+})();
+</script>
+<script>
+var LANG=/^es/i.test(navigator.language)?'es':'en',THEME='auto';
+try{LANG=localStorage.getItem('lang')||LANG;THEME=localStorage.getItem('theme')||'auto'}catch(e){}
+var CE={vis:'Vision',ml:'Machine learning',nlp:'Language',edge:'Edge & IoT',sw:'Software',data:'Big Data'};
+var EN={
+"Experiencia":"Experience","Proyectos":"Projects","Formación":"Education","Contacto":"Contact",
+"Ingeniero de IA en Bilbao. Construyo sistemas de percepción y aprendizaje automático que funcionan":"AI engineer in Bilbao. I build perception and machine learning systems that run",
+"en el borde":"at the edge",
+": sensores reales, hardware limitado y resultados medibles.":": real sensors, limited hardware and measurable results.",
+"Anomalía detectada. En IKERLAN entrené un detector no supervisado para un sensor LiDAR fijo: AUC 0,97 sobre más de 2.600 fotogramas.":"Anomaly detected. At IKERLAN I trained an unsupervised detector for a fixed LiDAR sensor: AUC 0.97 over 2,600+ frames.",
+"Una señal con ruido y un pico que no debería estar ahí: el tipo de problema en el que trabajo. Pulsa el punto rojo.":"A noisy signal with a spike that shouldn’t be there: the kind of problem I work on. Click the red dot.",
+"Prácticas de investigación en ML":"ML Research Intern",
+"junio 2026 – actualidad":"June 2026 – present",
+"Percepción e IA en el borde para sistemas ferroviarios autónomos.":"Perception and edge AI for autonomous railway systems.",
+"Diseñé una capa de tolerancia a fallos para un sistema de detección de obstáculos en tiempo real con RGB, térmica y LiDAR (ROS 2 Humble, Python/C++) sobre una Jetson AGX Orin.":"Designed a fault-tolerance layer for a real-time RGB, thermal and LiDAR obstacle-detection pipeline (ROS 2 Humble, Python/C++) on a Jetson AGX Orin.",
+"Construí y desplegué un detector de anomalías no supervisado para un LiDAR fijo, con proyecciones 3D y 2D, sustracción de fondo y modelos de deep learning. AUC 0,97 en más de 2.600 fotogramas.":"Built and deployed an unsupervised anomaly detector for a fixed LiDAR sensor, using 3D and 2D projections, background subtraction and deep learning models. AUC 0.97 over 2,600+ frames.",
+"Ingeniero de IA":"AI Engineer",
+"Universidad de Deusto, Comisión de Inteligencia Artificial":"University of Deusto, Artificial Intelligence Commission","septiembre 2025 – julio 2026":"September 2025 – July 2026",
+"Desarrollé una plataforma de IA conversacional y RAG que ofrece materiales de curso, tutoría personalizada y ejercicios de repaso a más de 12.000 estudiantes.":"Developed a conversational AI and RAG platform that gives 12,000+ students course materials, personalised tutoring and review exercises.",
+"Admite varios LLM, skills e interacción multimodal.":"Supports multiple LLMs, skills and multimodal interaction.",
+"Desplegada con Docker y AWS.":"Deployed with Docker and AWS.",
+"Código en GitHub":"Code on GitHub",
+"Cronología":"Timeline",
+"Formación y habilidades":"Education and skills",
+"Doble grado en Ingeniería Informática y Ciencia de Datos e IA":"Double Bachelor’s Degree in Computer Engineering and Data Science & AI",
+"Universidad de Deusto · 2022 – 2027 (previsto)":"University of Deusto · 2022 – 2027 (expected)",
+"Aprendizaje automático avanzado, deep learning, aprendizaje por refuerzo, optimización, estadística avanzada y arquitectura del software.":"Advanced machine learning, deep learning, reinforcement learning, optimization, advanced statistics and software architecture.",
+"Trabajos de fin de grado: un sistema de percepción en el borde tolerante a fallos con ROS 2 y la detección no supervisada de obstáculos con LiDAR.":"Final degree projects: a fault-tolerant edge perception system with ROS 2, and unsupervised LiDAR obstacle detection.",
+"Certificaciones y reconocimientos":"Certifications and awards",
+"AWS Educate Machine Learning Foundations · enero 2026":"AWS Educate Machine Learning Foundations · January 2026",
+"Finalista, IKERLAN CTF 2025":"Finalist, IKERLAN CTF 2025",
+"Participante, HackUPC 2026":"Participant, HackUPC 2026",
+"Miembro del comité organizador de 0xDecode, el club de ingeniería de la Universidad de Deusto":"Member of the organizing committee of 0xDecode, the Engineering Club at the University of Deusto",
+"Lenguajes":"Languages","Herramientas":"Tools",
+"Hablemos":"Let’s talk",
+"Estoy abierto a prácticas, investigación y proyectos de IA aplicada.":"I’m open to internships, research and applied AI projects.",
+"Bilbao, España":"Bilbao, Spain",
+"Principal":"Main",
+"Señal de un sensor con una anomalía detectada":"Sensor signal with a detected anomaly",
+"Anomalía detectada: ver detalle":"Anomaly detected: show details",
+"Filtrar proyectos":"Filter projects"
+};
+var PE={
+'iker-dominguez/TGVD_Teamwork':{sum:'Distributed processing of retail transactions with PySpark: cleaning, batch analytics and real-time streaming.',t:'Team project on a retail transactions dataset: data cleaning and preparation with PySpark, 7 batch analytical queries (seasonal trends per product, approximate unique transactions…) run on a Hadoop/HDFS cluster, and 5 streaming queries with Spark Structured Streaming (windowed aggregations over real-time JSON streams), with the results analysed in notebooks.'},
+'josuviteri/PRISM':{n:'PRISM, image generation with diffusion',sum:'Replication of DDPM, DDIM and classifier-free guidance to synthesise images from pure noise.',t:'Research project replicating three foundational diffusion papers (DDPM, DDIM and CFG) on MNIST and CIFAR-10 with a U-Net: progressive denoising from noise to image, deterministic sampling with DDIM and class-conditional control through guidance. Generative quality is evaluated with FID/IS against the published results (best FID 36.04 on CIFAR-10 with CFG w=2), with Weights & Biases tracking, fixed seeds and pinned dependencies for reproducibility, and a web app that visualises the generation process (noise → intermediate states → final image) comparing DDPM and DDIM side by side.'},
+'Potzon/EcoNest':{sum:'End-to-end IoT system to monitor wildlife in Bilbao’s public parks.',t:'Platform combining a Raspberry Pi 5 with cameras and bird detection (YOLO11n) at the edge, local MQTT communications and a FastAPI + PostgreSQL + Grafana backend to log and visualise pigeon detections, help manage overpopulation and expose the data to citizens and the city council through a documented REST API.'},
+'iaud-tech/boti-open-webui':{sum:'Conversational AI and RAG platform that provides 12,000+ university students with course materials, personalised tutoring and review exercises.',t:'It supports multiple LLMs, skills and multimodal interaction, and is deployed with Docker and AWS.'},
+'Potzon/oil_storage_detection_airbus':{n:'Oil tank detection',sum:'Classical OpenCV vs. YOLOv8: detecting oil storage tanks in satellite imagery.',t:'A rigorous comparison of 7 deterministic techniques (Hough, blob detector, watershed, DoG…) against a fine-tuned YOLOv8n on the Airbus Oil Storage dataset, under the same evaluation protocol. Conclusion: the classical ceiling is F1 ≈ 0.35 versus 0.843 for the CNN.'},
+'Potzon/WATT':{n:'WATT, energy market forecasting',sum:'Multivariate time-series forecasting of the Spanish electricity market with Transformers.',t:'Research on 4 years of consumption, generation, price and weather data from the Spanish power grid. It evolves from SARIMAX and tree ensembles to Temporal Fusion Transformers, Chronos and TimesFM, with quantile regression for probabilistic forecasts, SMOGN for price spikes and walk-forward validation. Result: 5.3% hourly and 4.4% daily MAPE.'},
+'josuviteri/Atmo-Ensemble':{sum:'Ensemble models to classify air quality, optimised for edge computing.',t:'Comparative study of ensemble learning strategies (bagging vs. boosting, SMOTE/RUSBoost, Frank & Hall ordinal methods, semi-supervised learning) on a pollution dataset, weighing accuracy against efficiency (inference time and model size) for low-power sensors, with SHAP for explainability.'},
+'josuviteri/NASA_bearing_RUL':{sum:'Remaining useful life of bearings with classical ML and deep learning, served through an API.',t:'End-to-end pipeline on the IMS Rexnord dataset: EDA, temporal feature extraction, RUL labelling and a comparison of SVR, Random Forest and LightGBM against 1D CNNs (raw waveform) and 2D CNNs (spectrograms). Includes an interactive Streamlit app and a REST inference service with BentoML.'},
+'josuviteri/Clinic-Note-NLP':{sum:'Automatic classification and summarisation of doctor–patient dialogues with transformers.',t:'NLP project on the MEDIQA-Chat/Sum 2023 datasets that turns clinical conversations into structured notes. Compares TF-IDF + classical ML, CNNs with Clinical-BERT, Bi-LSTM and DistilBERT for section classification, and T5-small for summarisation (ROUGE, BERTScore), with strategies for limited GPU (FP16, gradient accumulation). Deployed in a generative chatbot.'},
+'Potzon/oct-retina-pathology-detection':{sum:'Detecting vitreomacular interface pathologies in retinal OCT images.',t:'Project for Fundamentals of Computer Vision that classifies optical coherence tomography scans as healthy retina or vitreomacular traction (VMT), applying computer vision techniques to real images from the Mendeley dataset.'},
+'Potzon/RL-Adversarial-Multi-Agent-Unity-Lab':{n:'Adversarial multi-agent RL (Unity ML-Agents)',sum:'Predator–prey environment trained with reinforcement learning.',t:'Unity ML-Agents simulation where a spider (predator) chases a worm (prey), both trained with POLA/PPO in single and dual configurations. Supports headless training with standalone builds, checkpoints and ONNX models for inference.'},
+'MateoPerezSuarez/Bank-Churn-Project':{sum:'Predicting bank customer churn with interpretable models.',t:'Analysis of 10,000 Kaggle customers with EDA, feature engineering and a comparison of classifiers (Random Forest as the best model, recall ≈ 70%, ROC-AUC ≈ 82%), plus regression, clustering and explainability with SHAP, PDP and ALE to turn the model into retention strategies.'},
+'josuviteri/VerseVault':{sum:'C++ client-server app to browse and read books over a custom protocol.',t:'Digital library with a client-server architecture over TCP sockets, a custom application protocol, a SQLite database (search by genre, country, client and reading progress) and book downloads via cURL, with interactive terminal menus.'},
+'hjasier/madChess':{sum:'Chess with wild rules: local or online play against a bot, in 1v1 or 2v2.',t:'Two modes: classic, with traditional rules, and madChess, where each player picks 3 “alter” pieces (modified moves and captures) and 3 “boosts” (ice, bombs, mines, control…) that change the game dynamically.'}
+};
+function pv(p,k){
+  if(LANG==='en'){
+    if(k==='d')return p.d.replace('Ene','Jan').replace('Dic','Dec').replace('en curso','ongoing');
+    var e=PE[p.r];if(e&&e[k])return e[k];
+  }
+  return p[k];
+}
+function cat(k){return LANG==='en'?CE[k]:CATS[k]}
+function renderFilters(){
+  var all=[['all',LANG==='en'?'All':'Todos']].concat(Object.keys(CATS).map(function(k){return[k,cat(k)]}));
+  fil.innerHTML='';
+  all.forEach(function(a){
+    var b=document.createElement('button');b.className='chip';b.textContent=a[1];
+    b.setAttribute('aria-pressed',cur===a[0]);
+    b.onclick=function(){cur=a[0];renderFilters();renderList()};
+    fil.appendChild(b);
+  });
+}
+function renderList(){
+  list.innerHTML='';
+  P.filter(function(p){return cur==='all'||p.c===cur}).forEach(function(p,i){
+    var d=document.createElement('div');d.className='proj';
+    d.style.setProperty('--cc','var(--c-'+p.c+')');
+    var id='p'+i;
+    d.innerHTML='<button aria-expanded="false" aria-controls="'+id+'"><span class="date">'+pv(p,'d')+'</span><span><h3><span class="dot"></span>'+pv(p,'n')+'</h3><span class="sum">'+pv(p,'sum')+'</span></span><span class="plus" aria-hidden="true">+</span></button><div class="more" id="'+id+'"><div class="in"><p>'+pv(p,'t')+'</p><a href="https://github.com/'+p.r+'">'+(LANG==='en'?'View repository on GitHub':'Ver repositorio en GitHub')+'</a></div></div>';
+    var b=d.firstChild;
+    b.onclick=function(){var o=d.classList.toggle('open');b.setAttribute('aria-expanded',o)};
+    list.appendChild(d);
+  });
+}
+function renderTL(){
+  var D=P.filter(function(p){return p.s}).sort(function(a,b){return a.s[0]*12+a.s[1]-b.s[0]*12-b.s[1]});
+  var W=900,L=250,rowH=30,top=26,H=top+D.length*rowH+10,m0=2023*12+9,m1=2026*12+12,span=m1-m0;
+  function x(m){return L+(m-m0)/span*(W-L-10)}
+  var o='';
+  [2024,2025,2026].forEach(function(y){var xx=x(y*12+1);o+='<line x1="'+xx+'" x2="'+xx+'" y1="'+(top-8)+'" y2="'+H+'"/><text x="'+(xx+4)+'" y="14">'+y+'</text>'});
+  D.forEach(function(p,i){
+    var a=p.s[0]*12+p.s[1]-1,b=p.s[2]*12+p.s[3],y=top+i*rowH,n=pv(p,'n');
+    o+='<text class="lab" x="0" y="'+(y+14)+'">'+n.split(',')[0].replace(/ \(.*/,'')+'</text>';
+    o+='<rect x="'+x(a)+'" y="'+(y+3)+'" width="'+Math.max(x(b)-x(a),7)+'" height="16" rx="4" fill="var(--c-'+p.c+')"><title>'+n+': '+pv(p,'d')+'</title></rect>';
+  });
+  var s=document.getElementById('tl');s.setAttribute('viewBox','0 0 '+W+' '+H);s.innerHTML=o;
+  s.setAttribute('aria-label',LANG==='en'?'Project timeline, 2023 to 2026':'Cronología de proyectos de 2023 a 2026');
+  document.getElementById('legend').innerHTML=Object.keys(CATS).map(function(k){return '<span><span class="dot" style="background:var(--c-'+k+')"></span>'+cat(k)+'</span>'}).join('');
+}
+function applyLang(){
+  document.documentElement.lang=LANG;
+  var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var t=n.parentNode;return (t.nodeName==='SCRIPT'||t.nodeName==='STYLE'||t.closest('#list,#filters,#legend,.ctl'))?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}});
+  var n;while(n=w.nextNode()){
+    if(n._es===undefined)n._es=n.nodeValue;
+    var k=n._es.trim();
+    if(Object.prototype.hasOwnProperty.call(EN,k))n.nodeValue=LANG==='en'?n._es.replace(k,EN[k]):n._es;
+  }
+  document.querySelectorAll('[aria-label]:not(#tl):not(.ctl button)').forEach(function(el){
+    if(el._es===undefined)el._es=el.getAttribute('aria-label');
+    if(Object.prototype.hasOwnProperty.call(EN,el._es))el.setAttribute('aria-label',LANG==='en'?EN[el._es]:el._es);
+  });
+  document.title=LANG==='en'?'Gotzon Viteri · AI Engineer':'Gotzon Viteri · Ingeniero de IA';
+  document.querySelectorAll('[data-lang]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===LANG)});
+  renderFilters();renderList();renderTL();applyTheme();
+}
+function applyTheme(){
+  var r=document.documentElement;
+  if(THEME==='auto')r.removeAttribute('data-theme');else r.setAttribute('data-theme',THEME);
+  var N={auto:['Auto','Auto'],light:['Claro','Light'],dark:['Oscuro','Dark']}[THEME][LANG==='en'?1:0];
+  var b=document.getElementById('themeBtn');
+  b.textContent=(LANG==='en'?'Theme: ':'Tema: ')+N;
+  b.setAttribute('aria-label',(LANG==='en'?'Colour theme: ':'Tema de color: ')+N+(LANG==='en'?'. Click to change.':'. Pulsa para cambiar.'));
+}
+document.querySelectorAll('[data-lang]').forEach(function(b){
+  b.onclick=function(){LANG=b.dataset.lang;try{localStorage.setItem('lang',LANG)}catch(e){}applyLang()};
+});
+document.getElementById('themeBtn').onclick=function(){
+  THEME={auto:'light',light:'dark',dark:'auto'}[THEME];
+  try{localStorage.setItem('theme',THEME)}catch(e){}
+  applyTheme();
+};
+applyLang();
+</script>
+<script>
+var mq=window.matchMedia('(prefers-color-scheme: dark)'),sw=document.getElementById('themeBtn');
+sw.innerHTML='<span class="knob"><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/></svg><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></span>';
+function effTheme(){return THEME==='auto'?(mq.matches?'dark':'light'):THEME}
+function applyTheme(){
+  var r=document.documentElement,en=LANG==='en';
+  if(THEME==='auto')r.removeAttribute('data-theme');else r.setAttribute('data-theme',THEME);
+  sw.setAttribute('aria-checked',effTheme()==='dark');
+  var l=(en?'Dark mode':'Modo oscuro')+(THEME==='auto'?(en?' (following your device)':' (según tu dispositivo)'):'');
+  sw.setAttribute('aria-label',l);sw.title=l;
+}
+sw.onclick=function(){
+  var next=effTheme()==='dark'?'light':'dark';
+  var h=document.documentElement;h.classList.add('theming');clearTimeout(window._th);window._th=setTimeout(function(){h.classList.remove('theming')},450);
+  THEME=next===(mq.matches?'dark':'light')?'auto':next;
+  try{localStorage.setItem('theme',THEME)}catch(e){}
+  applyTheme();
+};
+if(mq.addEventListener)mq.addEventListener('change',applyTheme);
+if(THEME!=='auto'&&THEME!=='light'&&THEME!=='dark')THEME='auto';
+applyTheme();
+requestAnimationFrame(function(){requestAnimationFrame(function(){sw.classList.add('ready')})});
+</script>
+<script>
+/* Microinteracciones */
+(function(){
+  var _rl=renderList,stag=false;
+  fil.addEventListener('click',function(e){if(e.target.closest('.chip'))stag=true},true);
+  renderList=function(){
+    _rl();
+    if(stag){[].forEach.call(list.children,function(c,i){c.style.animationDelay=(i*45)+'ms';c.classList.add('enter')});stag=false}
+  };
+  document.querySelectorAll('[data-lang]').forEach(function(b){
+    b.addEventListener('click',function(){var w=document.querySelector('.wrap');w.classList.remove('fade');void w.offsetWidth;w.classList.add('fade')});
+  });
+  if(!('IntersectionObserver' in window))return;
+  var tl=document.querySelector('.tl');tl.classList.add('pre');
+  new IntersectionObserver(function(es,ob){
+    if(es[0].isIntersecting){
+      [].forEach.call(tl.querySelectorAll('rect'),function(r,i){r.style.transitionDelay=(i*45)+'ms'});
+      tl.classList.remove('pre');ob.disconnect();
+    }
+  },{threshold:.25}).observe(tl);
+  var links={};[].forEach.call(document.querySelectorAll('nav a[href^="#"]'),function(a){links[a.getAttribute('href').slice(1)]=a});
+  var so=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){for(var k in links)links[k].classList.toggle('on',k===e.target.id)}
+    });
+  },{rootMargin:'-40% 0px -55% 0px'});
+  ['experiencia','proyectos','formacion','contacto'].forEach(function(id){var s=document.getElementById(id);if(s)so.observe(s)});
+})();
+</script>
+<script>
+/* Habilidades visuales */
+(function(){
+  var M={'C/C++':'C++','Scikit-Learn':'Sk','NumPy':'Np','Pandas':'Pd','PyTorch':'Pt','TensorFlow':'Tf','TensorRT':'TRT','ROS 2':'R2','OpenCV':'Cv','Transformers':'Tr','NVIDIA JetPack':'Jp','Weights & Biases':'W&B','LaTeX':'Lx','Bash':'$_','Java':'Jv','Python':'Py','Docker':'Dk','Grafana':'Gf','Jupyter':'Jy'};
+  var I=['<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/>','<path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/>','<path d="M4 8l8-4 8 4v8l-8 4-8-4z"/><path d="M4 8l8 4 8-4M12 12v8"/>'];
+  [].forEach.call(document.querySelectorAll('.skills>div'),function(d,i){
+    var p=d.querySelector('p'),h=d.querySelector('h3'),names=p.textContent.split(', ');
+    var ul=document.createElement('ul');ul.className='tags';
+    names.forEach(function(n){
+      var li=document.createElement('li'),m=document.createElement('span');
+      m.className='mono';m.setAttribute('aria-hidden','true');m.textContent=M[n]||n.slice(0,3);
+      li.appendChild(m);li.appendChild(document.createTextNode(n));ul.appendChild(li);
+    });
+    p.replaceWith(ul);
+    h.insertAdjacentHTML('afterbegin','<svg viewBox="0 0 24 24" aria-hidden="true">'+I[i]+'</svg>');
+    h.insertAdjacentHTML('beforeend','<span class="n">'+names.length+'</span>');
+  });
+})();
+</script>
+<script>
+/* Stack como pipeline */
+(function(){
+  var M={'C/C++':'C++','Scikit-Learn':'Sk','NumPy':'Np','Pandas':'Pd','PyTorch':'Pt','TensorFlow':'Tf','TensorRT':'TRT','ROS 2':'R2','OpenCV':'Cv','Transformers':'Tr','NVIDIA JetPack':'Jp','Weights & Biases':'W&B','LaTeX':'Lx','Bash':'$_','Java':'Jv','Python':'Py','Docker':'Dk','Grafana':'Gf','Jupyter':'Jy'};
+  [].forEach.call(document.querySelectorAll('#flow .tags'),function(ul){
+    ul.getAttribute('data-t').split(',').forEach(function(n){
+      var li=document.createElement('li'),m=document.createElement('span');
+      m.className='mono';m.setAttribute('aria-hidden','true');m.textContent=M[n]||n.slice(0,3);
+      li.appendChild(m);li.appendChild(document.createTextNode(n));ul.appendChild(li);
+    });
+  });
+  var X={'Del sensor al servicio':'From sensor to service','Mi stack, ordenado por el lugar que ocupa en un sistema de IA aplicada.':'My stack, ordered by where it sits in an applied AI system.','Captura':'Capture','Sensores y percepción':'Sensors and perception','Modelado':'Modelling','Entrenar y evaluar':'Train and evaluate','Despliegue':'Deployment','Del portátil al dispositivo':'From laptop to device','Seguimiento':'Tracking','Medir y versionar':'Measure and version','Lenguajes de base':'Core languages'};
+  for(var k in X)EN[k]=X[k];
+  applyLang();
+  var f=document.getElementById('flow');
+  if(!('IntersectionObserver' in window))return;
+  f.classList.add('pre');
+  new IntersectionObserver(function(es,ob){if(es[0].isIntersecting){f.classList.remove('pre');ob.disconnect()}},{threshold:.35}).observe(f);
+})();
+</script>
+<script>EN['Activo']='Active';applyLang();</script>
+</body>
+</html>

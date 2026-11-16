@@ -33,6 +33,11 @@ a{color:inherit}
 nav{display:flex;gap:1.4rem;flex-wrap:wrap;padding:1.4rem 0;font-weight:500;font-size:.95rem}
 nav a{text-decoration:none;color:var(--mute)}nav a:hover{color:var(--ink)}
 nav .me{margin-right:auto;color:var(--ink);font-weight:600}
+@media(min-width:761px){
+  html{overflow-x:clip;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 5rem)}
+  nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20}
+  nav::before{content:"";position:absolute;top:0;bottom:0;left:calc(50% - 50vw);right:calc(50% - 50vw);z-index:-1;background:color-mix(in srgb,var(--bg) 82%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+}
 h1,h2,h3{font-family:var(--display);line-height:1.05;margin:0;letter-spacing:-.02em}
 h1{font-size:clamp(3.2rem,11vw,8rem);font-weight:800;letter-spacing:-.045em;margin-top:clamp(1.5rem,5vw,4rem)}
 h2{font-size:clamp(1.9rem,4.5vw,3rem);font-weight:800;margin-bottom:1.6rem}

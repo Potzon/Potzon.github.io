@@ -8,7 +8,7 @@
 <meta name="author" content="Gotzon Viteri">
 <link rel="canonical" href="https://potzon.github.io/">
 <link rel="alternate" hreflang="es" href="https://potzon.github.io/">
-<link rel="alternate" hreflang="en" href="https://potzon.github.io/">
+<link rel="alternate" hreflang="en" href="https://potzon.github.io/?lang=en">
 <link rel="alternate" hreflang="x-default" href="https://potzon.github.io/">
 <meta name="theme-color" content="#E8EDF1" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0F1820" media="(prefers-color-scheme: dark)">
@@ -447,8 +447,14 @@ nav a.on{color:var(--ink)}
   };
 
   var cur='all',stag=false;
-  var LANG=/^es/i.test(navigator.language)?'es':'en',THEME='auto';
-  try{LANG=localStorage.getItem('lang')||LANG;THEME=localStorage.getItem('theme')||'auto'}catch(e){}
+  var urlLang=null;
+  try{urlLang=new URLSearchParams(window.location.search).get('lang')}catch(e){}
+  var LANG=(urlLang==='es'||urlLang==='en')?urlLang:(/^es/i.test(navigator.language)?'es':'en'),THEME='auto';
+  try{
+    if(urlLang==='es'||urlLang==='en')localStorage.setItem('lang',urlLang);
+    else LANG=localStorage.getItem('lang')||LANG;
+    THEME=localStorage.getItem('theme')||'auto';
+  }catch(e){}
   if(THEME!=='auto'&&THEME!=='light'&&THEME!=='dark')THEME='auto';
 
   var list=document.getElementById('list'),fil=document.getElementById('filters');
@@ -617,6 +623,12 @@ nav a.on{color:var(--ink)}
     b.onclick=function(){
       LANG=b.dataset.lang;
       try{localStorage.setItem('lang',LANG)}catch(e){}
+      try{
+        var u=new URL(window.location.href);
+        if(LANG==='en')u.searchParams.set('lang','en');
+        else u.searchParams.delete('lang');
+        history.replaceState(null,'',u.pathname+u.search+u.hash);
+      }catch(e){}
       var w=document.querySelector('.wrap');w.classList.remove('fade');void w.offsetWidth;w.classList.add('fade');
       applyLang();
     };
@@ -659,6 +671,8 @@ nav a.on{color:var(--ink)}
   const faviconLink = document.getElementById('dynamic-favicon');
   if (!faviconLink) return;
 
+  const staticHref = faviconLink.getAttribute('href') || 'favicon.svg';
+  const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   const canvas = document.createElement('canvas');
   canvas.width = 32;
   canvas.height = 32;
@@ -666,18 +680,17 @@ nav a.on{color:var(--ink)}
 
   let radius = 3;
   let opacity = 0.9;
+  let timerId = null;
 
   function updateRadarFavicon() {
     ctx.clearRect(0, 0, 32, 32);
 
-    // 1. Anillo de radar expansivo
     ctx.beginPath();
     ctx.arc(16, 16, radius, 0, 2 * Math.PI);
-    ctx.strokeStyle = `rgba(255, 122, 87, ${opacity})`; // Color de alerta brillante (--alert)
-    ctx.lineWidth = 3; 
+    ctx.strokeStyle = `rgba(255, 122, 87, ${opacity})`;
+    ctx.lineWidth = 3;
     ctx.stroke();
 
-    // 2. Punto central del radar sólido y brillante
     ctx.beginPath();
     ctx.arc(16, 16, 5, 0, 2 * Math.PI);
     ctx.fillStyle = '#FF7A57';
@@ -685,7 +698,6 @@ nav a.on{color:var(--ink)}
 
     faviconLink.href = canvas.toDataURL('image/png');
 
-    // Velocidad de expansión y desvanecimiento original
     radius += 0.8;
     opacity -= 0.06;
 
@@ -695,8 +707,26 @@ nav a.on{color:var(--ink)}
     }
   }
 
-  // Mantenemos tu intervalo original
-  setInterval(updateRadarFavicon, 70);
+  function stopFavicon() {
+    if (timerId !== null) {
+      clearInterval(timerId);
+      timerId = null;
+    }
+    faviconLink.href = staticHref;
+  }
+
+  function syncFavicon() {
+    if (motionQuery.matches || document.hidden) {
+      stopFavicon();
+    } else if (timerId === null) {
+      updateRadarFavicon();
+      timerId = setInterval(updateRadarFavicon, 70);
+    }
+  }
+
+  document.addEventListener('visibilitychange', syncFavicon);
+  if (motionQuery.addEventListener) motionQuery.addEventListener('change', syncFavicon);
+  syncFavicon();
 })();
 </script>
 </body>

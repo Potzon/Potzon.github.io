@@ -4,6 +4,44 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Gotzon Viteri · Ingeniero de IA</title>
+<meta name="description" content="Ingeniero de IA en Bilbao. Sistemas de percepción y aprendizaje automático en el borde: ROS 2, visión por computador y LiDAR. Prácticas de investigación en IKERLAN, estudiante en la Universidad de Deusto.">
+<meta name="author" content="Gotzon Viteri">
+<link rel="canonical" href="https://potzon.github.io/">
+<meta name="theme-color" content="#E8EDF1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F1820" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gotzon Viteri">
+<meta property="og:title" content="Gotzon Viteri · Ingeniero de IA">
+<meta property="og:description" content="Percepción y aprendizaje automático en el borde: sensores reales, hardware limitado y resultados medibles.">
+<meta property="og:url" content="https://potzon.github.io/">
+<meta property="og:image" content="https://potzon.github.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Gotzon Viteri, ingeniero de IA, con una señal de sensor y una anomalía marcada en rojo">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gotzon Viteri · Ingeniero de IA">
+<meta name="twitter:description" content="Percepción y aprendizaje automático en el borde: sensores reales, hardware limitado y resultados medibles.">
+<meta name="twitter:image" content="https://potzon.github.io/og-image.png">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Person",
+  "name":"Gotzon Viteri",
+  "jobTitle":"Ingeniero de IA",
+  "url":"https://potzon.github.io/",
+  "image":"https://potzon.github.io/og-image.png",
+  "address":{"@type":"PostalAddress","addressLocality":"Bilbao","addressCountry":"ES"},
+  "worksFor":{"@type":"Organization","name":"IKERLAN"},
+  "alumniOf":{"@type":"CollegeOrUniversity","name":"Universidad de Deusto"},
+  "knowsAbout":["Aprendizaje automático","Visión por computador","IA en el borde","ROS 2","LiDAR","NLP"],
+  "sameAs":["https://linkedin.com/in/gotzonviteri","https://github.com/Potzon"]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -33,6 +71,7 @@ a{color:inherit}
 nav{display:flex;gap:1.4rem;flex-wrap:wrap;padding:1.4rem 0;font-weight:500;font-size:.95rem}
 nav a{text-decoration:none;color:var(--mute)}nav a:hover{color:var(--ink)}
 nav .me{margin-right:auto;color:var(--ink);font-weight:600}
+@media(max-width:760px){nav .me{display:none}nav{gap:.6rem 1.1rem}.signal .tip{width:11rem}}
 @media(min-width:761px){
   html{overflow-x:clip;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 5rem)}
   nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20}
@@ -124,7 +163,7 @@ section{padding:clamp(2.5rem,7vw,5rem) 0;border-top:1px solid var(--line)}
 .stages{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;position:relative}
 .stages::before,.stages::after{content:"";position:absolute;left:1.25rem;right:calc((100% - 3.6rem)/4 - 1.25rem);top:1.1875rem;height:2px;background:var(--line)}
 .stages::after{background:var(--ria);transform-origin:left}
-.stages li{--g:var(--c-vis)}.stages li:nth-child(2){--g:var(--c-ml)}.stages li:nth-child(3){--g:var(--c-edge)}.stages li:nth-child(4){--g:var(--c-sw)}
+.stages>li{--g:var(--c-vis)}.stages>li:nth-child(2){--g:var(--c-ml)}.stages>li:nth-child(3){--g:var(--c-edge)}.stages>li:nth-child(4){--g:var(--c-sw)}
 .node{position:relative;z-index:1;display:grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:50%;background:var(--bg);border:2px solid var(--g);font:800 1rem var(--display)}
 .stages h4{font:800 1.25rem var(--display);letter-spacing:-.01em;margin:.9rem 0 0}
 .stages .st{margin:.15rem 0 0;color:var(--mute);font-size:.92rem}
@@ -134,9 +173,9 @@ section{padding:clamp(2.5rem,7vw,5rem) 0;border-top:1px solid var(--line)}
 @media(max-width:760px){
   .stages{grid-template-columns:1fr;gap:1.6rem}
   .stages::before,.stages::after{display:none}
-  .stages li{position:relative;padding-left:3.4rem}
+  .stages>li{position:relative;padding-left:3.4rem}
   .stages .node{position:absolute;left:0;top:0}
-  .stages li:not(:last-child)::before{content:"";position:absolute;left:1.1875rem;top:2.75rem;bottom:-1.6rem;width:2px;background:var(--line)}
+  .stages>li:not(:last-child)::before{content:"";position:absolute;left:1.1875rem;top:2.75rem;bottom:-1.6rem;width:2px;background:var(--line)}
   .stages h4{margin-top:0}
 }
 @media (prefers-reduced-motion:no-preference){.stages::after{transition:transform 1.5s cubic-bezier(.5,0,.2,1)}.flow.pre .stages::after{transform:scaleX(0)}}
@@ -187,9 +226,26 @@ nav a.on{color:var(--ink)}
   @keyframes fadeIn{from{opacity:.25}}
   html.theming *:not(.sw):not(.knob){transition:background-color .35s,color .35s,border-color .35s,fill .35s,stroke .35s!important}
 }
+.skip{position:absolute;left:1rem;top:-4rem;z-index:100;background:var(--ink);color:var(--bg);padding:.6rem 1rem;border-radius:8px;font-weight:600;text-decoration:none;transition:top .15s}
+.skip:focus{top:calc(env(safe-area-inset-top,0px) + .8rem)}
+@media print{
+  :root,:root[data-theme="dark"]{--bg:#fff;--surface:#fff;--ink:#14202B;--mute:#53636F;--line:#C4CFD7;--ria:#0E6B76;--alert:#D9411E;
+    --c-vis:#0E6B76;--c-ml:#3B4FA3;--c-nlp:#8A5A12;--c-edge:#B23A6E;--c-sw:#5C6B2E;--c-data:#7A3FB0}
+  html{font-size:12px!important;overflow:visible}
+  body{background:#fff}
+  nav,.skip,.ctl,.filters,#filters,.flag .tip{display:none!important}
+  *{animation:none!important;transition:none!important}
+  .wave{stroke-dashoffset:0!important}
+  .flow.pre .stages::after,.tl.pre rect{transform:none!important}
+  .more{grid-template-rows:1fr!important}.more .in{visibility:visible!important}
+  section,.job,.proj{break-inside:avoid}
+  a{text-decoration:none}
+}
 </style>
 </head>
 <body>
+<a class="skip" href="#top">Saltar al contenido</a>
+<noscript><style>.skills[hidden]{display:grid}.flow,.tl,#filters{display:none}</style><div class="wrap"><p class="cap" style="margin:1rem 0">Esta web necesita JavaScript para mostrar la lista de proyectos, la cronología y el stack. Mientras tanto, puedes ver mi trabajo en <a href="https://github.com/Potzon">GitHub</a> o en <a href="https://linkedin.com/in/gotzonviteri">LinkedIn</a>.</p></div></noscript>
 <div class="wrap">
   <nav aria-label="Principal">
     <a class="me" href="#top">Gotzon Viteri</a>
@@ -204,7 +260,7 @@ nav a.on{color:var(--ink)}
     <div class="signal" id="signal">
       <svg viewBox="0 0 1000 220" preserveAspectRatio="none" role="img" aria-label="Señal de un sensor con una anomalía detectada">
         <line class="base" x1="0" y1="110" x2="1000" y2="110"/>
-        <path class="wave" id="wave" pathLength="1" vector-effect="non-scaling-stroke"/>
+        <path class="wave" id="wave" pathLength="1"/>
       </svg>
       <button class="flag" id="flag" aria-label="Anomalía detectada: ver detalle">
         <span class="tip">Anomalía detectada. En IKERLAN entrené un detector no supervisado para un sensor LiDAR fijo: AUC 0,97 sobre más de 2.600 fotogramas.</span>
@@ -290,9 +346,10 @@ nav a.on{color:var(--ink)}
     <h2>Hablemos</h2>
     <p class="lede" style="margin-top:0">Estoy abierto a roles de ingeniero de IA y ML, y a proyectos de investigación con impacto real.</p>
     <div class="links">
-      <a href="mailto:gotzonviteri@gmail.com">gotzonviteri@gmail.com</a>
+      <a href="mailto:gotzonviteri@gmail.com">Email</a>
       <a href="https://linkedin.com/in/gotzonviteri">LinkedIn</a>
       <a href="https://github.com/Potzon">GitHub</a>
+      <a href="Gotzon_Viteri_CV.pdf" download>CV (PDF)</a>
     </div>
     <small>Bilbao, España</small>
   </footer>
@@ -370,6 +427,17 @@ renderFilters();renderList();
     pts.push((i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1));
   }
   document.getElementById('wave').setAttribute('d',pts.join(' '));
+  /* Grosor constante en píxeles (sin vector-effect, que rompía el dibujado al escalar) */
+  var sg=document.querySelector('#signal svg'),wv=document.getElementById('wave'),bs=sg.querySelector('.base');
+  function fit(){
+    var cw=sg.getBoundingClientRect().width;if(!cw)return;
+    var k=parseFloat(getComputedStyle(document.documentElement).fontSize)/16,u=1000/cw;
+    wv.style.strokeWidth=(2.2*k*u).toFixed(3);
+    bs.style.strokeWidth=(k*u).toFixed(3);
+    bs.style.strokeDasharray=(3*k*u).toFixed(2)+' '+(6*k*u).toFixed(2);
+  }
+  fit();
+  if(window.ResizeObserver)new ResizeObserver(fit).observe(sg);else addEventListener('resize',fit);
   var f=document.getElementById('flag');
   f.style.left=(AN/(n-1)*100)+'%';f.style.top=(ay/220*100)+'%';
   f.addEventListener('click',function(){f.classList.toggle('open')});
@@ -410,6 +478,8 @@ var EN={
 "Miembro del comité organizador de 0xDecode, el club de ingeniería de la Universidad de Deusto":"Member of the organizing committee of 0xDecode, the Engineering Club at the University of Deusto",
 "Lenguajes":"Languages","Herramientas":"Tools",
 "Hablemos":"Let’s talk",
+"Saltar al contenido":"Skip to content",
+"CV (PDF)":"CV (PDF)",
 "Estoy abierto a roles de ingeniero de IA y ML, y a proyectos de investigación con impacto real.":"I’m open to AI and machine learning engineering roles, and to research projects with real impact.",
 "Bilbao, España":"Bilbao, Spain",
 "Principal":"Main",
@@ -491,6 +561,7 @@ function applyLang(){
     if(Object.prototype.hasOwnProperty.call(EN,el._es))el.setAttribute('aria-label',LANG==='en'?EN[el._es]:el._es);
   });
   document.title=LANG==='en'?'Gotzon Viteri · AI Engineer':'Gotzon Viteri · Ingeniero de IA';
+  var md=document.querySelector('meta[name=description]');if(md){if(md._es===undefined)md._es=md.content;md.content=LANG==='en'?'AI engineer in Bilbao, Spain. Perception and machine learning systems at the edge: ROS 2, computer vision and LiDAR. Research intern at IKERLAN, student at the University of Deusto.':md._es}
   document.querySelectorAll('[data-lang]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===LANG)});
   renderFilters();renderList();renderTL();applyTheme();
 }

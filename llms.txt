@@ -1,0 +1,49 @@
+# Gotzon Viteri
+
+> Ingeniero de IA en Bilbao (España). Construye sistemas de percepción y aprendizaje automático que funcionan en el borde: sensores reales, hardware limitado y resultados medibles. Abierto a roles de ingeniero de IA y ML y a proyectos de investigación con impacto real.
+>
+> AI engineer based in Bilbao, Spain. Builds perception and machine learning systems that run at the edge: real sensors, constrained hardware and measurable results. Open to AI/ML engineer roles and research projects with real impact.
+
+## Perfil
+
+- Ubicación: Bilbao, España
+- Formación: Doble grado en Ingeniería Informática y Ciencia de Datos e IA, Universidad de Deusto (2022 – 2027, previsto)
+- Áreas: visión por computador, aprendizaje automático, IA en el borde (edge), NLP/RAG, series temporales, ingeniería de software
+- Idiomas de la web: español e inglés
+
+## Experiencia
+
+- Prácticas de investigación en ML, IKERLAN, Mondragón (junio 2026 – actualidad): percepción e IA en el borde para sistemas ferroviarios autónomos. Capa de tolerancia a fallos para detección de obstáculos en tiempo real con RGB, térmica y LiDAR (ROS 2 Humble, Python/C++, Jetson AGX Orin). Detector de anomalías no supervisado para un LiDAR fijo, con AUC 0,97 sobre más de 2.600 fotogramas.
+- Ingeniero de IA, Comisión de Inteligencia Artificial de la Universidad de Deusto (septiembre 2025 – julio 2026): plataforma de IA conversacional y RAG (BOTI) para más de 12.000 estudiantes, con varios LLM, skills e interacción multimodal, desplegada con Docker y AWS.
+
+## Proyectos destacados
+
+- BOTI: plataforma de IA conversacional y RAG para estudiantes universitarios. Código: https://github.com/iaud-tech/boti-open-webui
+- EcoNest: sistema IoT de extremo a extremo para monitorizar fauna en parques de Bilbao (Raspberry Pi 5, YOLO11n, MQTT, FastAPI, PostgreSQL, Grafana).
+- PRISM: réplica de DDPM, DDIM y classifier-free guidance sobre MNIST y CIFAR-10 con U-Net.
+- Detección de tanques de petróleo: 7 técnicas clásicas de OpenCV frente a YOLOv8n sobre imágenes de satélite (F1 ≈ 0,35 frente a 0,843).
+- WATT: predicción del mercado eléctrico español con series temporales y Transformers (TFT, Chronos, TimesFM).
+- NASA Bearing RUL: vida útil restante de rodamientos con ML clásico y deep learning, servida por API.
+- Clinic Note NLP: clasificación y resumen de diálogos médico-paciente con transformers.
+- Otros: Atmo-Ensemble, OCT Retina Pathology Detection, RL adversarial multiagente (Unity ML-Agents), AWS Hadoop Cluster, Bank Churn Prediction, VerseVault, madChess.
+
+## Stack
+
+- Captura: ROS 2, OpenCV, NVIDIA JetPack
+- Modelado: PyTorch, TensorFlow, Transformers, Scikit-Learn, NumPy, Pandas
+- Despliegue: TensorRT, Docker, AWS
+- Seguimiento: Grafana, Weights & Biases, Jupyter, Git
+- Lenguajes: Python, C/C++, SQL, Bash, Java, LaTeX
+
+## Reconocimientos
+
+- AWS Educate Machine Learning Foundations (enero 2026)
+- Finalista, IKERLAN CTF 2025
+- Participante, HackUPC 2026
+- Miembro del comité organizador de 0xDecode, club de ingeniería de la Universidad de Deusto
+
+## Contacto
+
+- LinkedIn: https://linkedin.com/in/gotzonviteri
+- GitHub: https://github.com/Potzon
+- Email: disponible mediante el enlace "Email" de la web

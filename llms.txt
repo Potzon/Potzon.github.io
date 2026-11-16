@@ -8,24 +8,31 @@
 
 - Ubicación: Bilbao, España
 - Formación: Doble grado en Ingeniería Informática y Ciencia de Datos e IA, Universidad de Deusto (2022 – 2027, previsto)
+- Trabajos de fin de grado: sistema de percepción en el borde tolerante a fallos con ROS 2 y detección no supervisada de obstáculos con LiDAR
 - Áreas: visión por computador, aprendizaje automático, IA en el borde (edge), NLP/RAG, series temporales, ingeniería de software
 - Idiomas de la web: español e inglés
 
 ## Experiencia
 
-- Prácticas de investigación en ML, IKERLAN, Mondragón (junio 2026 – actualidad): percepción e IA en el borde para sistemas ferroviarios autónomos. Capa de tolerancia a fallos para detección de obstáculos en tiempo real con RGB, térmica y LiDAR (ROS 2 Humble, Python/C++, Jetson AGX Orin). Detector de anomalías no supervisado para un LiDAR fijo, con AUC 0,97 sobre más de 2.600 fotogramas.
+- Prácticas de investigación en ML, IKERLAN, Mondragón (junio 2026 – actualidad): percepción e IA en el borde para sistemas ferroviarios autónomos. Capa de tolerancia a fallos para detección de obstáculos en tiempo real con RGB, térmica y LiDAR (ROS 2 Humble, Python/C++, Jetson AGX Orin). Detector de anomalías no supervisado para un LiDAR fijo con proyecciones 3D/2D, sustracción de fondo y deep learning, con AUC 0,97 sobre más de 2.600 fotogramas.
 - Ingeniero de IA, Comisión de Inteligencia Artificial de la Universidad de Deusto (septiembre 2025 – julio 2026): plataforma de IA conversacional y RAG (BOTI) para más de 12.000 estudiantes, con varios LLM, skills e interacción multimodal, desplegada con Docker y AWS.
 
 ## Proyectos destacados
 
-- BOTI: plataforma de IA conversacional y RAG para estudiantes universitarios. Código: https://github.com/iaud-tech/boti-open-webui
-- EcoNest: sistema IoT de extremo a extremo para monitorizar fauna en parques de Bilbao (Raspberry Pi 5, YOLO11n, MQTT, FastAPI, PostgreSQL, Grafana).
-- PRISM: réplica de DDPM, DDIM y classifier-free guidance sobre MNIST y CIFAR-10 con U-Net.
-- Detección de tanques de petróleo: 7 técnicas clásicas de OpenCV frente a YOLOv8n sobre imágenes de satélite (F1 ≈ 0,35 frente a 0,843).
-- WATT: predicción del mercado eléctrico español con series temporales y Transformers (TFT, Chronos, TimesFM).
-- NASA Bearing RUL: vida útil restante de rodamientos con ML clásico y deep learning, servida por API.
-- Clinic Note NLP: clasificación y resumen de diálogos médico-paciente con transformers.
-- Otros: Atmo-Ensemble, OCT Retina Pathology Detection, RL adversarial multiagente (Unity ML-Agents), AWS Hadoop Cluster, Bank Churn Prediction, VerseVault, madChess.
+- PRISM (Sep – Nov 2026, en curso): réplica de DDPM, DDIM y classifier-free guidance sobre MNIST y CIFAR-10 con arquitectura U-Net y evaluación FID/IS (mejor FID 36,04 en CIFAR-10 con CFG w=2), tracking en Weights & Biases y web app comparativa DDPM vs DDIM. Código: https://github.com/josuviteri/PRISM
+- EcoNest (Nov 2026 – en curso): sistema IoT de extremo a extremo para monitorizar fauna en parques públicos de Bilbao (Raspberry Pi 5, YOLO11n, MQTT, FastAPI, PostgreSQL, Grafana y API REST documentada). Código: https://github.com/Potzon/EcoNest
+- Detección de tanques de petróleo (Sep 2026): comparación de 7 técnicas clásicas de OpenCV (Hough, blob detector, watershed, DoG) frente a YOLOv8n sobre imágenes de satélite Airbus Oil Storage (F1 ≈ 0,35 frente a 0,843). Código: https://github.com/Potzon/oil_storage_detection_airbus
+- BOTI (Sep 2025 – Jul 2026): plataforma de IA conversacional y RAG para más de 12.000 estudiantes universitarios, desplegada con Docker y AWS. Código: https://github.com/iaud-tech/boti-open-webui
+- WATT (Mar – May 2026): predicción multivariante del mercado eléctrico español sobre 4 años de datos con SARIMAX, ensembles, Temporal Fusion Transformers, Chronos y TimesFM, regresión cuantil, SMOGN y validación walk-forward (5,3 % MAPE horario y 4,4 % diario). Código: https://github.com/Potzon/WATT
+- Atmo-Ensemble (Feb – Mar 2026): estudio comparativo de ensemble learning (bagging, boosting, SMOTE/RUSBoost, Frank & Hall ordinal, semisupervisado) para clasificar calidad del aire optimizado para edge computing con explicabilidad SHAP. Código: https://github.com/josuviteri/Atmo-Ensemble
+- NASA Bearing RUL (Nov 2025 – Ene 2026): estimación de vida útil restante de rodamientos (IMS Rexnord) comparando SVR, Random Forest y LightGBM frente a CNN 1D y 2D, con app en Streamlit y servicio REST con BentoML. Código: https://github.com/josuviteri/NASA_bearing_RUL
+- Clinic Note NLP (Oct 2025 – Feb 2026): clasificación y resumen automático de diálogos médico-paciente sobre MEDIQA-Chat/Sum 2023 con Clinical-BERT, Bi-LSTM, DistilBERT y T5-small (ROUGE, BERTScore) bajo restricciones de GPU, desplegado en chatbot generativo. Código: https://github.com/josuviteri/Clinic-Note-NLP
+- OCT Retina Pathology Detection (Oct – Dic 2025): clasificación de tomografías de coherencia óptica entre retina sana y tracción vítreo-macular (VMT). Código: https://github.com/Potzon/oct-retina-pathology-detection
+- RL adversarial multiagente (Sep 2025 – Ene 2026): entorno depredador-presa en Unity ML-Agents entrenado con POLA/PPO y exportación ONNX. Código: https://github.com/Potzon/RL-Adversarial-Multi-Agent-Unity-Lab
+- AWS Hadoop Cluster (May 2025): procesamiento distribuido de transacciones retail con PySpark batch (7 consultas analíticas en Hadoop/HDFS) y Spark Structured Streaming (5 consultas en tiempo real). Código: https://github.com/iker-dominguez/TGVD_Teamwork
+- Bank Churn Prediction (Oct – Dic 2024): predicción de fuga de 10.000 clientes bancarios (Random Forest con recall ≈ 70 % y ROC-AUC ≈ 82 %) con explicabilidad SHAP, PDP y ALE. Código: https://github.com/MateoPerezSuarez/Bank-Churn-Project
+- VerseVault (Feb – May 2024): biblioteca digital cliente-servidor en C++ sobre sockets TCP con protocolo propio, SQLite y descarga con cURL. Código: https://github.com/josuviteri/VerseVault
+- madChess (Oct 2023 – Mar 2024): ajedrez con modos clásico y madChess (piezas alter y boosts dinámicos) local u online contra bot en 1v1 o 2v2. Código: https://github.com/hjasier/madChess
 
 ## Stack
 
@@ -33,7 +40,7 @@
 - Modelado: PyTorch, TensorFlow, Transformers, Scikit-Learn, NumPy, Pandas
 - Despliegue: TensorRT, Docker, AWS
 - Seguimiento: Grafana, Weights & Biases, Jupyter, Git
-- Lenguajes: Python, C/C++, SQL, Bash, Java, LaTeX
+- Lenguajes de base: Python, C/C++, SQL, Bash, Java, LaTeX
 
 ## Reconocimientos
 
@@ -44,6 +51,7 @@
 
 ## Contacto
 
+- Web: https://potzon.github.io/
+- Email: gotzonviteri@gmail.com
 - LinkedIn: https://linkedin.com/in/gotzonviteri
 - GitHub: https://github.com/Potzon
-- Email: disponible mediante el enlace "Email" de la web

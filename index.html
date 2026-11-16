@@ -7,6 +7,9 @@
 <meta name="description" content="Ingeniero de IA en Bilbao. Sistemas de percepción y aprendizaje automático en el borde: ROS 2, visión por computador y LiDAR. Prácticas de investigación en IKERLAN, estudiante en la Universidad de Deusto.">
 <meta name="author" content="Gotzon Viteri">
 <link rel="canonical" href="https://potzon.github.io/">
+<link rel="alternate" hreflang="es" href="https://potzon.github.io/">
+<link rel="alternate" hreflang="en" href="https://potzon.github.io/">
+<link rel="alternate" hreflang="x-default" href="https://potzon.github.io/">
 <meta name="theme-color" content="#E8EDF1" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0F1820" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -576,7 +579,9 @@ nav a.on{color:var(--ink)}
     if(window.ResizeObserver)new ResizeObserver(fit).observe(sg);else addEventListener('resize',fit);
     var f=document.getElementById('flag');
     f.style.left=(AN/(n-1)*100)+'%';f.style.top=(ay/220*100)+'%';
-    f.addEventListener('click',function(){f.classList.toggle('open')});
+    f.addEventListener('click',function(e){e.stopPropagation();f.classList.toggle('open')});
+    document.addEventListener('click',function(e){if(!f.contains(e.target))f.classList.remove('open')});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')f.classList.remove('open')});
   })();
 
   /* Copiar email al clicar */

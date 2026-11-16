@@ -29,7 +29,8 @@ html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--body)}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--ria);outline-offset:3px;border-radius:4px}
-.wrap{max-width:1040px;margin:0 auto;padding:0 clamp(1.1rem,4vw,2.5rem)}
+.wrap{max-width:clamp(1040px,70vw,1400px);margin:0 auto;padding:0 clamp(1.1rem,4vw,2.5rem)}
+@media (min-width:1800px){ html{font-size:112.5%} }
 nav{display:flex;gap:1.4rem;flex-wrap:wrap;padding:1.4rem 0;font-weight:500;font-size:.95rem}
 nav a{text-decoration:none;color:var(--mute)}nav a:hover{color:var(--ink)}
 nav .me{margin-right:auto;color:var(--ink);font-weight:600}

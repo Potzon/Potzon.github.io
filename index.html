@@ -9,6 +9,7 @@
 <link rel="canonical" href="https://potzon.github.io/">
 <link rel="alternate" hreflang="es" href="https://potzon.github.io/">
 <link rel="alternate" hreflang="en" href="https://potzon.github.io/?lang=en">
+<link rel="alternate" hreflang="eu" href="https://potzon.github.io/?lang=eu">
 <link rel="alternate" hreflang="x-default" href="https://potzon.github.io/">
 <meta name="theme-color" content="#E8EDF1" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0F1820" media="(prefers-color-scheme: dark)">
@@ -26,6 +27,7 @@
 <meta property="og:image:alt" content="Gotzon Viteri, ingeniero de IA, con una señal de sensor y una anomalía marcada en rojo">
 <meta property="og:locale" content="es_ES">
 <meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="eu_ES">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Gotzon Viteri · Ingeniero de IA">
 <meta name="twitter:description" content="Percepción y aprendizaje automático en el borde: sensores reales, hardware limitado y resultados medibles.">
@@ -173,6 +175,8 @@ section{padding:clamp(2.5rem,7vw,5rem) 0;border-top:1px solid var(--line)}
 .stages .tags{margin-top:.9rem}
 .bus{--g:var(--c-nlp);margin-top:2.4rem;padding:1rem 1.2rem;border:1px dashed var(--line);border-radius:12px;display:flex;flex-wrap:wrap;align-items:center;gap:.7rem 1.3rem}
 .busl{font:600 1rem var(--display)}.bus .tags{margin:0}
+.bus.langs{--g:var(--c-data);margin-top:1rem}
+.bus.langs .mono{padding:0 .55rem;color:color-mix(in srgb,var(--g) 80%,var(--ink))}
 @media(max-width:760px){
   .stages{grid-template-columns:1fr;gap:1.6rem}
   .stages::before,.stages::after{display:none}
@@ -254,7 +258,7 @@ nav a.on{color:var(--ink)}
   <nav aria-label="Principal">
     <a class="me" href="#top">Gotzon Viteri</a>
     <a href="#experiencia">Experiencia</a><a href="#proyectos">Proyectos</a><a href="#formacion">Formación</a><a href="#contacto">Contacto</a>
-    <span class="ctl"><button class="chip" data-lang="es" lang="es" aria-label="Español">ES</button><button class="chip" data-lang="en" lang="en" aria-label="English">EN</button><button class="sw" id="themeBtn" role="switch" aria-checked="false"></button></span>
+    <span class="ctl"><button class="chip" data-lang="es" lang="es" aria-label="Español">ES</button><button class="chip" data-lang="en" lang="en" aria-label="English">EN</button><button class="chip" data-lang="eu" lang="eu" aria-label="Euskara">EU</button><button class="sw" id="themeBtn" role="switch" aria-checked="false"></button></span>
   </nav>
 
   <header id="top">
@@ -338,6 +342,13 @@ nav a.on{color:var(--ink)}
         <li><span class="node">4</span><h4>Seguimiento</h4><p class="st">Medir y versionar</p><ul class="tags" data-t="Grafana,Weights & Biases,Jupyter,Git"></ul></li>
       </ol>
       <div class="bus"><span class="busl">Lenguajes de base</span><ul class="tags" data-t="Python,C/C++,SQL,Bash,Java,LaTeX"></ul></div>
+      <div class="bus langs"><span class="busl">Idiomas</span>
+        <ul class="tags">
+          <li><span class="mono">nativo</span>Castellano</li>
+          <li><span class="mono">C1</span>Inglés</li>
+          <li><span class="mono">B2</span>Euskera</li>
+        </ul>
+      </div>
     </div>
     <div class="skills" hidden>
       <div><h3>Frameworks</h3><p>PyTorch, Transformers, TensorFlow, TensorRT, ROS 2, OpenCV, Scikit-Learn, NumPy, Pandas</p></div>
@@ -409,6 +420,8 @@ nav a.on{color:var(--ink)}
     "Finalista, IKERLAN CTF 2025":"Finalist, IKERLAN CTF 2025",
     "Participante, HackUPC 2026":"Participant, HackUPC 2026",
     "Miembro del comité organizador de 0xDecode, el club de ingeniería de la Universidad de Deusto":"Member of the organizing committee of 0xDecode, the Engineering Club at the University of Deusto",
+    "Idiomas":"Languages",
+    "Castellano":"Spanish","Inglés":"English","Euskera":"Basque","nativo":"native",
     "Del sensor al servicio":"From sensor to service",
     "Mi stack, ordenado por el lugar que ocupa en un sistema de IA aplicada.":"My stack, ordered by where it sits in an applied AI system.",
     "Captura":"Capture","Sensores y percepción":"Sensors and perception",
@@ -445,13 +458,82 @@ nav a.on{color:var(--ink)}
     'josuviteri/VerseVault':{sum:'C++ client-server app to browse and read books over a custom protocol.',t:'Digital library with a client-server architecture over TCP sockets, a custom application protocol, a SQLite database (search by genre, country, client and reading progress) and book downloads via cURL, with interactive terminal menus.'},
     'hjasier/madChess':{sum:'Chess with wild rules: local or online play against a bot, in 1v1 or 2v2.',t:'Two modes: classic, with traditional rules, and madChess, where each player picks 3 “alter” pieces (modified moves and captures) and 3 “boosts” (ice, bombs, mines, control…) that change the game dynamically.'}
   };
+  var CU={vis:'Ikusmena',ml:'Ikaskuntza automatikoa',nlp:'Hizkuntza',edge:'Ertza eta IoT',sw:'Softwarea',data:'Big Data'};
+  var MU={'Ene':'Urt','Feb':'Ots','Mar':'Mar','May':'Mai','Sep':'Ira','Oct':'Urr','Nov':'Aza','Dic':'Abe','en curso':'martxan'};
+  var EU={
+    "Experiencia":"Esperientzia","Proyectos":"Proiektuak","Formación":"Prestakuntza","Contacto":"Harremana",
+    "Activo":"Aktibo",
+    "Ingeniero de IA en Bilbao. Construyo sistemas de percepción y aprendizaje automático que funcionan":"Adimen artifizialeko ingeniaria Bilbon. Pertzepzio- eta ikaskuntza automatikoko sistemak eraikitzen ditut,",
+    "en el borde":"ertzean",
+    ": sensores reales, hardware limitado y resultados medibles.":" funtzionatzen dutenak: benetako sentsoreak, hardware mugatua eta emaitza neurgarriak.",
+    "Anomalía detectada. En IKERLAN entrené un detector no supervisado para un sensor LiDAR fijo: AUC 0,97 sobre más de 2.600 fotogramas.":"Anomalia detektatu da. IKERLANen LiDAR sentsore finko baterako detektagailu gainbegiratu gabea entrenatu nuen: AUC 0,97, 2.600 fotograma baino gehiagotan.",
+    "Una señal con ruido y un pico que no debería estar ahí: el tipo de problema en el que trabajo. Pulsa el punto rojo.":"Zarata duen seinale bat eta hor egon behar ez lukeen tontor bat: horixe da lantzen dudan arazo mota. Sakatu puntu gorria.",
+    "Prácticas de investigación en ML":"Ikaskuntza automatikoko ikerketa-praktikak",
+    "junio 2026 – actualidad":"2026ko ekaina – gaur egun",
+    "Percepción e IA en el borde para sistemas ferroviarios autónomos.":"Pertzepzioa eta adimen artifiziala ertzean, tren-sistema autonomoetarako.",
+    "Diseñé una capa de tolerancia a fallos para un sistema de detección de obstáculos en tiempo real con RGB, térmica y LiDAR (ROS 2 Humble, Python/C++) sobre una Jetson AGX Orin.":"Akats-tolerantziako geruza bat diseinatu nuen denbora errealean oztopoak detektatzeko sistema baterako, RGB, kamera termikoa eta LiDAR erabiliz (ROS 2 Humble, Python/C++), Jetson AGX Orin plaka baten gainean.",
+    "Construí y desplegué un detector de anomalías no supervisado para un LiDAR fijo, con proyecciones 3D y 2D, sustracción de fondo y modelos de deep learning. AUC 0,97 en más de 2.600 fotogramas.":"LiDAR finko baterako anomalia-detektagailu gainbegiratu gabea eraiki eta zabaldu nuen, 3D eta 2D proiekzioekin, atzeko planoaren kenketarekin eta deep learning ereduekin. AUC 0,97, 2.600 fotograma baino gehiagotan.",
+    "Ingeniero de IA":"Adimen artifizialeko ingeniaria",
+    "Universidad de Deusto, Comisión de Inteligencia Artificial":"Deustuko Unibertsitatea, Adimen Artifizialaren Batzordea","septiembre 2025 – julio 2026":"2025eko iraila – 2026ko uztaila",
+    "Desarrollé una plataforma de IA conversacional y RAG que ofrece materiales de curso, tutoría personalizada y ejercicios de repaso a más de 12.000 estudiantes.":"Adimen artifizial elkarrizketazko eta RAG plataforma bat garatu nuen, 12.000 ikasle baino gehiagori ikastaroko materialak, tutoretza pertsonalizatua eta errepaso-ariketak eskaintzen dizkiena.",
+    "Admite varios LLM, skills e interacción multimodal.":"Hainbat LLM, skill eta elkarrekintza multimodala onartzen ditu.",
+    "Desplegada con Docker y AWS.":"Docker eta AWS bidez zabalduta.",
+    "Código en GitHub":"Kodea GitHub-en",
+    "Cronología":"Kronologia",
+    "Formación y habilidades":"Prestakuntza eta gaitasunak",
+    "Doble grado en Ingeniería Informática y Ciencia de Datos e IA":"Informatika Ingeniaritzako eta Datuen Zientzia eta Adimen Artifizialeko gradu bikoitza",
+    "Universidad de Deusto · 2022 – 2027 (previsto)":"Deustuko Unibertsitatea · 2022 – 2027 (aurreikusia)",
+    "Aprendizaje automático avanzado, deep learning, aprendizaje por refuerzo, optimización, estadística avanzada y arquitectura del software.":"Ikaskuntza automatiko aurreratua, deep learning, indartze bidezko ikaskuntza, optimizazioa, estatistika aurreratua eta software-arkitektura.",
+    "Trabajos de fin de grado: un sistema de percepción en el borde tolerante a fallos con ROS 2 y la detección no supervisada de obstáculos con LiDAR.":"Gradu amaierako lanak: akatsekiko tolerantea den ertzeko pertzepzio-sistema bat ROS 2-rekin, eta LiDARrekin oztopoak gainbegiratu gabe detektatzea.",
+    "Certificaciones y reconocimientos":"Ziurtagiriak eta aitorpenak",
+    "AWS Educate Machine Learning Foundations · enero 2026":"AWS Educate Machine Learning Foundations · 2026ko urtarrila",
+    "Finalista, IKERLAN CTF 2025":"Finalista, IKERLAN CTF 2025",
+    "Participante, HackUPC 2026":"Parte-hartzailea, HackUPC 2026",
+    "Miembro del comité organizador de 0xDecode, el club de ingeniería de la Universidad de Deusto":"0xDecode-ren antolakuntza-batzordeko kidea, Deustuko Unibertsitateko ingeniaritza-kluba",
+    "Idiomas":"Hizkuntzak",
+    "Castellano":"Gaztelania","Inglés":"Ingelesa","Euskera":"Euskara","nativo":"ama hizkuntza",
+    "Del sensor al servicio":"Sentsoretik zerbitzura",
+    "Mi stack, ordenado por el lugar que ocupa en un sistema de IA aplicada.":"Nire stacka, adimen artifizial aplikatuko sistema batean duen lekuaren arabera ordenatuta.",
+    "Captura":"Harrapaketa","Sensores y percepción":"Sentsoreak eta pertzepzioa",
+    "Modelado":"Modelatzea","Entrenar y evaluar":"Entrenatu eta ebaluatu",
+    "Despliegue":"Zabaltzea","Del portátil al dispositivo":"Ordenagailu eramangarritik gailura",
+    "Seguimiento":"Jarraipena","Medir y versionar":"Neurtu eta bertsionatu",
+    "Lenguajes de base":"Oinarrizko lengoaiak",
+    "Lenguajes":"Lengoaiak","Herramientas":"Tresnak",
+    "Hablemos":"Hitz egin dezagun",
+    "Saltar al contenido":"Joan edukira",
+    "Email":"Email",
+    "CV (PDF)":"CV (PDF)",
+    "Estoy abierto a roles de ingeniero de IA y ML, y a proyectos de investigación con impacto real.":"Adimen artifizialeko eta ikaskuntza automatikoko ingeniari-lanetarako eta benetako eragina duten ikerketa-proiektuetarako prest nago.",
+    "Bilbao, España":"Bilbo, Espainia",
+    "Principal":"Nagusia",
+    "Señal de un sensor con una anomalía detectada":"Anomalia bat detektatu duen sentsore-seinalea",
+    "Anomalía detectada: ver detalle":"Anomalia detektatu da: ikusi xehetasuna",
+    "Filtrar proyectos":"Iragazi proiektuak"
+  };
+  var PU={
+    'iker-dominguez/TGVD_Teamwork':{sum:'Retail transakzioen prozesamendu banatua PySparkekin: garbiketa, batch kontsulta analitikoak eta denbora errealeko streaming-a.',t:'Retail transakzioen datu-multzo baten gaineko talde-proiektua: datuen garbiketa eta prestaketa PySparkekin, 7 batch kontsulta analitiko Hadoop/HDFS kluster batean exekutatuta (produktuen denboraldi-joerak, transakzio bakar hurbilduak…) eta 5 streaming kontsulta Spark Structured Streaming-ekin (denbora errealeko JSON fluxuetan leihoen araberako agregazioak), emaitzen analisia notebooketan eginez.'},
+    'josuviteri/PRISM':{n:'PRISM, difusioarekin irudiak sortzea',sum:'DDPM, DDIM eta classifier-free guidance-en erreplika, zarata hutsetik irudiak sintetizatzeko.',t:'Difusio-ereduen oinarrizko hiru artikuluak (DDPM, DDIM eta CFG) erreplikatzen dituen ikerketa-proiektua, MNIST eta CIFAR-10 datu-multzoetan U-Net arkitekturarekin: zaratatik irudira denoising progresiboa, DDIMekin laginketa deterministikoa eta klaseen araberako kontrol baldintzatua guidance bidez. Sorkuntzaren kalitatea FID/IS-ekin ebaluatzen da argitaratutako emaitzen aurrean (FID onena 36,04 CIFAR-10ean, CFG w=2-rekin), Weights & Biases-ekin jarraipena eginez, hazi eta mendekotasun finkoekin erreproduzigarritasuna bermatzeko, eta sorkuntza-prozesua (zarata → tarteko egoerak → azken irudia) bistaratzen duen web aplikazio batekin, DDPM eta DDIM aldamenean alderatuz.'},
+    'Potzon/EcoNest':{sum:'Muturretik muturrerako IoT sistema, Bilboko parke publikoetako fauna monitorizatzeko.',t:'Raspberry Pi 5 plakak, kamerak eta hegaztien detekzioa (YOLO11n) ertzean, MQTT bidezko tokiko komunikazioak eta FastAPI + PostgreSQL + Grafana backend-a konbinatzen dituen plataforma, usoen detekzioak erregistratu eta bistaratzeko, gainpopulazioa kontrolatzen laguntzeko eta datuak herritarrei eta udalari REST API dokumentatu baten bidez eskaintzeko.'},
+    'iaud-tech/boti-open-webui':{sum:'Adimen artifizial elkarrizketazko eta RAG plataforma, 12.000 unibertsitate-ikasle baino gehiagori ikastaroko materialak, tutoretza pertsonalizatua eta errepaso-ariketak eskaintzen dizkiena.',t:'Hainbat LLM, skill eta elkarrekintza multimodala onartzen ditu, eta Docker eta AWS bidez zabalduta dago.'},
+    'Potzon/oil_storage_detection_airbus':{n:'Petrolio-tanken detekzioa',sum:'OpenCV klasikoa YOLOv8ren aurka: petrolio-tankak satelite-irudietan detektatzea.',t:'7 teknika deterministikoren (Hough, blob detector, watershed, DoG…) konparazio zorrotza, Airbus Oil Storage datu-multzoan fine-tuning egin zaion YOLOv8n-ren aurka, ebaluazio-protokolo berdinarekin. Ondorioa: teknika klasikoen sabaia F1 ≈ 0,35 da, CNNarenak 0,843 duen bitartean.'},
+    'Potzon/WATT':{n:'WATT, energia-merkatuen aurreikuspena',sum:'Espainiako merkatu elektrikoaren serie tenporal multibariatuen aurreikuspena Transformerrekin.',t:'Espainiako sare elektrikoaren kontsumo, sorkuntza, prezio eta meteorologia datuen 4 urtetan oinarritutako ikerketa. SARIMAX eta zuhaitz-ensembleetatik Temporal Fusion Transformers, Chronos eta TimesFM-era eboluzionatzen du, erregresio kuantilarekin aurreikuspen probabilistikoetarako, SMOGN-ekin prezio-gailurretarako eta walk-forward balidazioarekin. Emaitza: % 5,3ko MAPE orduka eta % 4,4koa egunero.'},
+    'josuviteri/Atmo-Ensemble':{sum:'Aire-kalitatea sailkatzeko ensemble ereduak, edge computing-erako optimizatuak.',t:'Ensemble learning estrategien azterketa konparatiboa (bagging vs. boosting, SMOTE/RUSBoost, Frank & Hall metodo ordinalak, ikaskuntza erdi-gainbegiratua) kutsadura-datu multzo batean, zehaztasunaren eta eraginkortasunaren (inferentzia-denbora eta ereduaren tamaina) arteko konpromisoa neurtuz kontsumo txikiko sentsoreetarako, SHAP erabiliz azalgarritasunerako.'},
+    'josuviteri/NASA_bearing_RUL':{sum:'Errodamenduen bizitza erabilgarri geratzen dena ML klasikoarekin eta deep learningarekin, API baten bidez zerbitzatua.',t:'IMS Rexnord datu-multzoaren gaineko pipeline osoa: EDA, ezaugarri tenporalen erauzketa, RUL etiketatzea eta SVR, Random Forest eta LightGBM-en konparazioa 1D CNN (uhin gordina) eta 2D CNN (espektrogramak) ereduekin. Streamlit aplikazio interaktibo bat eta BentoML-ekin REST inferentzia-zerbitzu bat barne hartzen ditu.'},
+    'josuviteri/Clinic-Note-NLP':{sum:'Mediku-paziente elkarrizketen sailkapen eta laburpen automatikoa transformerrekin.',t:'MEDIQA-Chat/Sum 2023 datu-multzoen gaineko NLP proiektua, elkarrizketa klinikoak ohar egituratu bihurtzen dituena. Atalen sailkapenerako TF-IDF + ML klasikoa, Clinical-BERT-ekin CNNa, Bi-LSTM eta DistilBERT alderatzen ditu, eta laburpenerako T5-small (ROUGE, BERTScore), GPU mugatuarentzako estrategiekin (FP16, gradient accumulation). Txatbot sortzaile batean zabalduta.'},
+    'Potzon/oct-retina-pathology-detection':{sum:'Erretinaren OCT irudietan interfase beirakara-makularreko patologiak detektatzea.',t:'Ordenagailu bidezko ikusmenaren oinarrietako proiektua, tomografia optiko koherenteak erretina osasuntsu edo beirakara-makular trakzioa (VMT) bezala sailkatzen dituena, Mendeley datu-multzoko benetako irudietan ikusmen artifizialeko teknikak aplikatuz.'},
+    'Potzon/RL-Adversarial-Multi-Agent-Unity-Lab':{n:'RL aurkari multiagentea (Unity ML-Agents)',sum:'Harrapari-harrapakin ingurunea indartze bidezko ikaskuntzarekin entrenatua.',t:'Unity ML-Agents simulazioa, non armiarma batek (harraparia) harra (harrapakina) jazartzen duen, biak POLA/PPO-rekin entrenatuak konfigurazio indibidual eta bikoitzetan. Entrenamendu headless-a onartzen du standalone build-ekin, checkpoint-ekin eta ONNX ereduekin inferentziarako.'},
+    'MateoPerezSuarez/Bank-Churn-Project':{sum:'Banku-bezeroen alde egitearen aurreikuspena eredu interpretagarriekin.',t:'Kaggleko 10.000 bezeroren analisia EDA, feature engineering eta sailkatzaileen konparazioarekin (Random Forest eredurik onena, recall ≈ % 70, ROC-AUC ≈ % 82), gehi erregresioa, clustering-a eta SHAP, PDP eta ALE bidezko azalgarritasuna, eredua atxikitze-estrategia bihurtzeko.'},
+    'josuviteri/VerseVault':{sum:'C++ bezero-zerbitzari aplikazioa liburuak arakatu eta irakurtzeko, protokolo propioarekin.',t:'TCP socketen gaineko bezero-zerbitzari arkitekturako liburutegi digitala, aplikazio-protokolo propioarekin, SQLite datu-basearekin (generoka, herrialdeka, bezeroka eta irakurketa-aurrerapenaren arabera bilaketa) eta cURL bidezko liburu-deskargekin, terminaleko menu interaktiboekin.'},
+    'hjasier/madChess':{sum:'Xake arau zoroekin: partida lokala edo online botaren aurka, 1v1 edo 2v2.',t:'Bi modu: klasikoa, ohiko arauekin, eta madChess, non jokalari bakoitzak 3 pieza «alter» (mugimendu eta harrapaketa aldatuak) eta 3 «boost» (izotza, bonbak, minak, kontrola…) aukeratzen dituen, partida modu dinamikoan aldatzen dutenak.'}
+  };
 
   var cur='all',stag=false;
   var urlLang=null;
   try{urlLang=new URLSearchParams(window.location.search).get('lang')}catch(e){}
-  var LANG=(urlLang==='es'||urlLang==='en')?urlLang:(/^es/i.test(navigator.language)?'es':'en'),THEME='auto';
+  var LANG=(urlLang==='es'||urlLang==='en'||urlLang==='eu')?urlLang:(/^eu/i.test(navigator.language)?'eu':/^es/i.test(navigator.language)?'es':'en'),THEME='auto';
   try{
-    if(urlLang==='es'||urlLang==='en')localStorage.setItem('lang',urlLang);
+    if(urlLang==='es'||urlLang==='en'||urlLang==='eu')localStorage.setItem('lang',urlLang);
     else LANG=localStorage.getItem('lang')||LANG;
     THEME=localStorage.getItem('theme')||'auto';
   }catch(e){}
@@ -466,12 +548,16 @@ nav a.on{color:var(--ink)}
       if(k==='d')return p.d.replace('Ene','Jan').replace('Dic','Dec').replace('en curso','ongoing');
       var e=PE[p.r];if(e&&e[k])return e[k];
     }
+    if(LANG==='eu'){
+      if(k==='d')return p.d.replace(/Ene|Feb|Mar|May|Sep|Oct|Nov|Dic|en curso/g,function(m){return MU[m]});
+      var u=PU[p.r];if(u&&u[k])return u[k];
+    }
     return p[k];
   }
-  function cat(k){return LANG==='en'?CE[k]:CATS[k]}
+  function cat(k){return LANG==='en'?CE[k]:LANG==='eu'?CU[k]:CATS[k]}
 
   function renderFilters(){
-    var all=[['all',LANG==='en'?'All':'Todos']].concat(Object.keys(CATS).map(function(k){return[k,cat(k)]}));
+    var all=[['all',LANG==='en'?'All':LANG==='eu'?'Denak':'Todos']].concat(Object.keys(CATS).map(function(k){return[k,cat(k)]}));
     fil.innerHTML='';
     all.forEach(function(a){
       var b=document.createElement('button');b.className='chip';b.textContent=a[1];
@@ -487,7 +573,7 @@ nav a.on{color:var(--ink)}
       var d=document.createElement('div');d.className='proj';
       d.style.setProperty('--cc','var(--c-'+p.c+')');
       var id='p'+i;
-      d.innerHTML='<button aria-expanded="false" aria-controls="'+id+'"><span class="date">'+pv(p,'d')+'</span><span><h3><span class="dot"></span>'+pv(p,'n')+'</h3><span class="sum">'+pv(p,'sum')+'</span></span><span class="plus" aria-hidden="true">+</span></button><div class="more" id="'+id+'"><div class="in"><p>'+pv(p,'t')+'</p><a href="https://github.com/'+p.r+'">'+(LANG==='en'?'View repository on GitHub':'Ver repositorio en GitHub')+'</a></div></div>';
+      d.innerHTML='<button aria-expanded="false" aria-controls="'+id+'"><span class="date">'+pv(p,'d')+'</span><span><h3><span class="dot"></span>'+pv(p,'n')+'</h3><span class="sum">'+pv(p,'sum')+'</span></span><span class="plus" aria-hidden="true">+</span></button><div class="more" id="'+id+'"><div class="in"><p>'+pv(p,'t')+'</p><a href="https://github.com/'+p.r+'">'+(LANG==='en'?'View repository on GitHub':LANG==='eu'?'Ikusi biltegia GitHub-en':'Ver repositorio en GitHub')+'</a></div></div>';
       var b=d.firstChild;
       b.onclick=function(){var o=d.classList.toggle('open');b.setAttribute('aria-expanded',o)};
       if(stag){d.style.animationDelay=(i*45)+'ms';d.classList.add('enter')}
@@ -508,33 +594,34 @@ nav a.on{color:var(--ink)}
       o+='<rect x="'+x(a)+'" y="'+(y+3)+'" width="'+Math.max(x(b)-x(a),7)+'" height="16" rx="4" fill="var(--c-'+p.c+')"><title>'+n+': '+pv(p,'d')+'</title></rect>';
     });
     var s=document.getElementById('tl');s.setAttribute('viewBox','0 0 '+W+' '+H);s.innerHTML=o;
-    s.setAttribute('aria-label',LANG==='en'?'Project timeline, 2023 to 2026':'Cronología de proyectos de 2023 a 2026');
+    s.setAttribute('aria-label',LANG==='en'?'Project timeline, 2023 to 2026':LANG==='eu'?'Proiektuen kronologia, 2023tik 2026ra':'Cronología de proyectos de 2023 a 2026');
     document.getElementById('legend').innerHTML=Object.keys(CATS).map(function(k){return '<span><span class="dot" style="background:var(--c-'+k+')"></span>'+cat(k)+'</span>'}).join('');
   }
 
   function effTheme(){return THEME==='auto'?(mq.matches?'dark':'light'):THEME}
   function applyTheme(){
-    var r=document.documentElement,en=LANG==='en';
+    var r=document.documentElement,en=LANG==='en',eu=LANG==='eu';
     if(THEME==='auto')r.removeAttribute('data-theme');else r.setAttribute('data-theme',THEME);
     sw.setAttribute('aria-checked',effTheme()==='dark');
-    var l=(en?'Dark mode':'Modo oscuro')+(THEME==='auto'?(en?' (following your device)':' (según tu dispositivo)'):'');
+    var l=(en?'Dark mode':eu?'Modu iluna':'Modo oscuro')+(THEME==='auto'?(en?' (following your device)':eu?' (zure gailuaren arabera)':' (según tu dispositivo)'):'');
     sw.setAttribute('aria-label',l);sw.title=l;
   }
 
   function applyLang(){
     document.documentElement.lang=LANG;
     var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var t=n.parentNode;return (t.nodeName==='SCRIPT'||t.nodeName==='STYLE'||t.closest('#list,#filters,#legend,.ctl'))?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}});
+    var D=LANG==='en'?EN:LANG==='eu'?EU:null;
     var n;while(n=w.nextNode()){
       if(n._es===undefined)n._es=n.nodeValue;
       var k=n._es.trim();
-      if(Object.prototype.hasOwnProperty.call(EN,k))n.nodeValue=LANG==='en'?n._es.replace(k,EN[k]):n._es;
+      if(Object.prototype.hasOwnProperty.call(EN,k))n.nodeValue=D?n._es.replace(k,D[k]!==undefined?D[k]:k):n._es;
     }
     document.querySelectorAll('[aria-label]:not(#tl):not(.ctl button)').forEach(function(el){
       if(el._es===undefined)el._es=el.getAttribute('aria-label');
-      if(Object.prototype.hasOwnProperty.call(EN,el._es))el.setAttribute('aria-label',LANG==='en'?EN[el._es]:el._es);
+      if(Object.prototype.hasOwnProperty.call(EN,el._es))el.setAttribute('aria-label',D&&D[el._es]!==undefined?D[el._es]:el._es);
     });
-    document.title=LANG==='en'?'Gotzon Viteri · AI Engineer':'Gotzon Viteri · Ingeniero de IA';
-    var md=document.querySelector('meta[name=description]');if(md){if(md._es===undefined)md._es=md.content;md.content=LANG==='en'?'AI engineer in Bilbao, Spain. Perception and machine learning systems at the edge: ROS 2, computer vision and LiDAR. Research intern at IKERLAN, student at the University of Deusto.':md._es}
+    document.title=LANG==='en'?'Gotzon Viteri · AI Engineer':LANG==='eu'?'Gotzon Viteri · Adimen artifizialeko ingeniaria':'Gotzon Viteri · Ingeniero de IA';
+    var md=document.querySelector('meta[name=description]');if(md){if(md._es===undefined)md._es=md.content;md.content=LANG==='en'?'AI engineer in Bilbao, Spain. Perception and machine learning systems at the edge: ROS 2, computer vision and LiDAR. Research intern at IKERLAN, student at the University of Deusto.':LANG==='eu'?'Adimen artifizialeko ingeniaria Bilbon. Ertzeko pertzepzio- eta ikaskuntza automatikoko sistemak: ROS 2, ordenagailu bidezko ikusmena eta LiDAR. Ikerketa-praktikak IKERLANen, Deustuko Unibertsitateko ikaslea.':md._es}
     document.querySelectorAll('[data-lang]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===LANG)});
     renderFilters();renderList();renderTL();applyTheme();
   }
@@ -554,7 +641,7 @@ nav a.on{color:var(--ink)}
     h.insertAdjacentHTML('afterbegin','<svg viewBox="0 0 24 24" aria-hidden="true">'+I[i]+'</svg>');
     h.insertAdjacentHTML('beforeend','<span class="n">'+names.length+'</span>');
   });
-  [].forEach.call(document.querySelectorAll('#flow .tags'),function(ul){
+  [].forEach.call(document.querySelectorAll('#flow .tags[data-t]'),function(ul){
     ul.getAttribute('data-t').split(',').forEach(function(n){
       var li=document.createElement('li'),m=document.createElement('span');
       m.className='mono';m.setAttribute('aria-hidden','true');m.textContent=M[n]||n.slice(0,3);
@@ -600,7 +687,7 @@ nav a.on{color:var(--ink)}
       var email=link.dataset.email;
       function showFeedback(){
         clearTimeout(timer);
-        link.textContent=LANG==='en'?'Email copied!':'¡Email copiado!';
+        link.textContent=LANG==='en'?'Email copied!':LANG==='eu'?'Emaila kopiatuta!':'¡Email copiado!';
         link.classList.add('copied');
         timer=setTimeout(function(){
           link.textContent='Email';
@@ -625,7 +712,7 @@ nav a.on{color:var(--ink)}
       try{localStorage.setItem('lang',LANG)}catch(e){}
       try{
         var u=new URL(window.location.href);
-        if(LANG==='en')u.searchParams.set('lang','en');
+        if(LANG!=='es')u.searchParams.set('lang',LANG);
         else u.searchParams.delete('lang');
         history.replaceState(null,'',u.pathname+u.search+u.hash);
       }catch(e){}

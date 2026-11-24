@@ -1,0 +1,8 @@
+services:
+  web:
+    build: .
+    image: potzon-web:latest
+    container_name: potzon-web
+    ports:
+      - "7000:80"
+    restart: unless-stopped

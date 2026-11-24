@@ -1,7 +1,5 @@
 .git
 .gitignore
-.env
-.env.example
 .dockerignore
 Dockerfile
 docker-compose.yml

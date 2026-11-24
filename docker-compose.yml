@@ -6,13 +6,3 @@ services:
     ports:
       - "7000:80"
     restart: unless-stopped
-
-  cloudflared:
-    image: cloudflare/cloudflared:latest
-    container_name: potzon-cloudflared
-    command: tunnel --no-autoupdate run
-    environment:
-      TUNNEL_TOKEN: ${TUNNEL_TOKEN:?define TUNNEL_TOKEN en .env}
-    depends_on:
-      - web
-    restart: unless-stopped

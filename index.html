@@ -122,6 +122,11 @@ section{padding:clamp(2.5rem,7vw,5rem) 0;border-top:1px solid var(--line)}
 .filters{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
 .chip{font:500 .92rem var(--body);padding:.45rem .9rem;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
 .chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.filters .chip[data-cat]{display:inline-flex;align-items:center;gap:.45rem;border-color:color-mix(in srgb,var(--cc) 55%,var(--line));background:color-mix(in srgb,var(--cc) 8%,transparent)}
+.filters .chip[data-cat]::before{content:"";width:.6rem;height:.6rem;border-radius:50%;background:var(--cc);flex:none}
+.filters .chip[data-cat]:hover{border-color:var(--cc);background:color-mix(in srgb,var(--cc) 16%,transparent)}
+.filters .chip[data-cat][aria-pressed="true"]{background:var(--cc);border-color:var(--cc);color:var(--bg);font-weight:700;box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--cc)}
+.filters .chip[data-cat][aria-pressed="true"]::before{background:var(--bg)}
 .proj{border-top:1px solid var(--line)}
 .proj:last-child{border-bottom:1px solid var(--line)}
 .proj>button{all:unset;box-sizing:border-box;display:grid;grid-template-columns:9.5rem 1fr auto;gap:1rem;align-items:baseline;width:100%;padding:1.1rem .2rem;cursor:pointer}
@@ -173,6 +178,8 @@ section{padding:clamp(2.5rem,7vw,5rem) 0;border-top:1px solid var(--line)}
 .stages .tags{margin-top:.9rem}
 .bus{--g:var(--c-nlp);margin-top:2.4rem;padding:1rem 1.2rem;border:1px dashed var(--line);border-radius:12px;display:flex;flex-wrap:wrap;align-items:center;gap:.7rem 1.3rem}
 .busl{font:600 1rem var(--display)}.bus .tags{margin:0}
+.bus.langs{--g:var(--c-data);margin-top:1rem}
+.bus.langs .mono{padding:0 .55rem;color:color-mix(in srgb,var(--g) 80%,var(--ink))}
 @media(max-width:760px){
   .stages{grid-template-columns:1fr;gap:1.6rem}
   .stages::before,.stages::after{display:none}
@@ -338,6 +345,13 @@ nav a.on{color:var(--ink)}
         <li><span class="node">4</span><h4>Seguimiento</h4><p class="st">Medir y versionar</p><ul class="tags" data-t="Grafana,Weights & Biases,Jupyter,Git"></ul></li>
       </ol>
       <div class="bus"><span class="busl">Lenguajes de base</span><ul class="tags" data-t="Python,C/C++,SQL,Bash,Java,LaTeX"></ul></div>
+      <div class="bus langs"><span class="busl">Idiomas</span>
+        <ul class="tags">
+          <li><span class="mono">nativo</span>Castellano</li>
+          <li><span class="mono">C1</span>Inglés</li>
+          <li><span class="mono">B2</span>Euskera</li>
+        </ul>
+      </div>
     </div>
     <div class="skills" hidden>
       <div><h3>Frameworks</h3><p>PyTorch, Transformers, TensorFlow, TensorRT, ROS 2, OpenCV, Scikit-Learn, NumPy, Pandas</p></div>
@@ -405,6 +419,8 @@ nav a.on{color:var(--ink)}
     "Universidad de Deusto · 2022 – 2027 (previsto)":"University of Deusto · 2022 – 2027 (expected)",
     "Aprendizaje automático avanzado, deep learning, aprendizaje por refuerzo, optimización, estadística avanzada y arquitectura del software.":"Advanced machine learning, deep learning, reinforcement learning, optimization, advanced statistics and software architecture.",
     "Trabajos de fin de grado: un sistema de percepción en el borde tolerante a fallos con ROS 2 y la detección no supervisada de obstáculos con LiDAR.":"Final degree projects: a fault-tolerant edge perception system with ROS 2, and unsupervised LiDAR obstacle detection.",
+    "Idiomas":"Languages",
+    "Castellano":"Spanish","Inglés":"English","Euskera":"Basque","nativo":"native",
     "Certificaciones y reconocimientos":"Certifications and awards",
     "AWS Educate Machine Learning Foundations · enero 2026":"AWS Educate Machine Learning Foundations · January 2026",
     "Finalista, IKERLAN CTF 2025":"Finalist, IKERLAN CTF 2025",
@@ -476,7 +492,7 @@ nav a.on{color:var(--ink)}
     var all=[['all',LANG==='en'?'All':'Todos']].concat(Object.keys(CATS).map(function(k){return[k,cat(k)]}));
     fil.innerHTML='';
     all.forEach(function(a){
-      var b=document.createElement('button');b.className='chip';b.textContent=a[1];
+      var b=document.createElement('button');b.className='chip';b.textContent=a[1];if(a[0]!=='all'){b.setAttribute('data-cat',a[0]);b.style.setProperty('--cc','var(--c-'+a[0]+')')}
       b.setAttribute('aria-pressed',cur===a[0]);
       b.onclick=function(){cur=a[0];stag=true;renderFilters();renderList()};
       fil.appendChild(b);
@@ -559,7 +575,7 @@ nav a.on{color:var(--ink)}
     h.insertAdjacentHTML('afterbegin','<svg viewBox="0 0 24 24" aria-hidden="true">'+I[i]+'</svg>');
     h.insertAdjacentHTML('beforeend','<span class="n">'+names.length+'</span>');
   });
-  [].forEach.call(document.querySelectorAll('#flow .tags'),function(ul){
+  [].forEach.call(document.querySelectorAll('#flow .tags[data-t]'),function(ul){
     ul.getAttribute('data-t').split(',').forEach(function(n){
       var li=document.createElement('li'),m=document.createElement('span');
       m.className='mono';m.setAttribute('aria-hidden','true');m.textContent=M[n]||n.slice(0,3);

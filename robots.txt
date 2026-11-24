@@ -29,5 +29,5 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-# Contexto estructurado para LLMs: https://potzon.github.io/llms.txt
-Sitemap: https://potzon.github.io/sitemap.xml
+# Contexto estructurado para LLMs: https://gotzon.viteri.eus/llms.txt
+Sitemap: https://gotzon.viteri.eus/sitemap.xml

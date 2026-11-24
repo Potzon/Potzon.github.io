@@ -51,7 +51,7 @@
 
 ## Contacto
 
-- Web: https://potzon.github.io/
+- Web: https://gotzon.viteri.eus/
 - Email: gotzonviteri@gmail.com
 - LinkedIn: https://linkedin.com/in/gotzonviteri
 - GitHub: https://github.com/Potzon

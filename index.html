@@ -139,12 +139,11 @@ section{padding:clamp(2.5rem,7vw,5rem) 0;border-top:1px solid var(--line)}
 .proj.open .plus{transform:rotate(45deg)}
 .more{display:grid;grid-template-rows:0fr;max-width:56rem;margin-left:calc(9.5rem + 1rem)}
 .more .in{min-height:0;overflow:hidden;visibility:hidden}
-.more .in>a{display:inline-block;margin-bottom:1.4rem}
-.more .in>a:not(:last-child){margin-right:1.4rem}
+.more .in>.btn{margin:0 .6rem 1.4rem 0}
+.more .btn:focus-visible{outline-offset:-3px}
 .proj.open .more{grid-template-rows:1fr}
 .proj.open .more .in{visibility:visible}
 .more p{margin:0 0 .8rem;max-width:40em}
-.more a{font-weight:600;color:var(--ria)}
 @media(max-width:700px){.proj>button{grid-template-columns:1fr auto}.proj .date{grid-column:1/-1}.more{margin-left:.2rem}}
 .tl{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1rem}
 .tl svg{display:block;min-width:45rem;width:100%;height:auto}
@@ -194,9 +193,21 @@ section{padding:clamp(2.5rem,7vw,5rem) 0;border-top:1px solid var(--line)}
 .list{margin:0;padding:0;list-style:none}.list li{padding:.55rem 0;border-top:1px solid var(--line)}
 footer{padding:clamp(3rem,8vw,6rem) 0 3rem;border-top:1px solid var(--line)}
 footer h2{font-size:clamp(2.2rem,7vw,5rem)}
-.links{display:flex;gap:1.5rem;flex-wrap:wrap;font-weight:600;font-size:1.1rem;margin-top:1.4rem}
-.links a{text-decoration-thickness:2px;text-underline-offset:5px;text-decoration-color:var(--ria)}
-.links a.copied{color:var(--ria)}
+.btn{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17L17 7M8 7h9v9'/%3E%3C/svg%3E");display:inline-flex;align-items:center;gap:.55rem;padding:.6rem 1.1rem;border:1.5px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);font:600 .95rem/1.2 var(--body);text-decoration:none;cursor:pointer}
+.btn::after{content:"";flex:none;width:1.05em;height:1.05em;background:currentColor;-webkit-mask:var(--ico) center/contain no-repeat;mask:var(--ico) center/contain no-repeat}
+.btn[download]{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 4v11M7 11l5 5 5-5M5 20h14'/%3E%3C/svg%3E")}
+.btn.mail{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Cpath d='M3 7l9 6 9-6'/%3E%3C/svg%3E")}
+.btn:hover{border-color:var(--ria);color:var(--ria)}
+.btn.pri{background:var(--ria);border-color:var(--ria);color:var(--bg)}
+.btn.pri:hover{color:var(--bg);filter:brightness(1.12)}
+.links{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.6rem}
+.links .btn{font-size:1.05rem;padding:.8rem 1.4rem}
+.links a.copied{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.tools{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,22rem),1fr));gap:1.2rem}
+.tool{display:flex;flex-direction:column;gap:.8rem;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--cc);border-radius:14px;padding:1.4rem 1.5rem 1.5rem}
+.tool h3{font-size:1.35rem;font-weight:600}
+.tool p{margin:0;color:var(--mute);font-size:.98rem;max-width:34em}
+.tool .acts{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:auto;padding-top:.4rem}
 small{display:block;color:var(--mute);margin-top:3rem}
 .ctl{display:flex;gap:.4rem;align-items:center}.ctl .chip{padding:.3rem .7rem;font-size:.85rem}
 .sw{all:unset;box-sizing:border-box;position:relative;width:3.375rem;height:1.875rem;margin-left:.5rem;border-radius:999px;background:var(--line);cursor:pointer}
@@ -215,7 +226,6 @@ nav a:hover::after,nav a.on::after{transform:scaleX(1)}
 nav a.on{color:var(--ink)}
 .proj>button:hover{background:color-mix(in srgb,var(--ink) 5%,transparent)}
 .chip:hover{border-color:var(--ink)}
-.links a:hover,.more a:hover{color:var(--ria)}
 .tl svg:hover rect{opacity:.35}.tl svg rect:hover{opacity:1}
 @media (prefers-reduced-motion:no-preference){
   .more{transition:grid-template-rows .32s ease}
@@ -229,7 +239,9 @@ nav a.on{color:var(--ink)}
   .chip:active{transform:scale(.93)}
   nav a:not(.me)::after{transition:transform .25s ease}
   nav a{transition:color .2s}
-  .links a{transition:color .2s}
+  .btn{transition:background .2s,color .2s,border-color .2s,transform .15s,filter .2s}
+  .btn:active{transform:scale(.97)}
+  .acts .btn:hover,.links .btn:hover{transform:translateY(-2px)}
   .proj.enter{animation:itemIn .35s cubic-bezier(.2,.7,.2,1) both}
   @keyframes itemIn{from{opacity:0;transform:translateY(10px)}}
   .tl rect{transform-box:fill-box;transform-origin:left;transition:opacity .2s,transform .6s cubic-bezier(.2,.7,.2,1)}
@@ -261,7 +273,7 @@ nav a.on{color:var(--ink)}
 <div class="wrap">
   <nav aria-label="Principal">
     <a class="me" href="#top">Gotzon Viteri</a>
-    <a href="#experiencia">Experiencia</a><a href="#proyectos">Proyectos</a><a href="#formacion">Formación</a><a href="#contacto">Contacto</a>
+    <a href="#experiencia">Experiencia</a><a href="#proyectos">Proyectos</a><a href="#herramientas">Herramientas</a><a href="#formacion">Formación</a><a href="#contacto">Contacto</a>
     <span class="ctl"><button class="chip" data-lang="es" lang="es" aria-label="Español">ES</button><button class="chip" data-lang="en" lang="en" aria-label="English">EN</button><button class="sw" id="themeBtn" role="switch" aria-checked="false"></button></span>
   </nav>
 
@@ -317,6 +329,18 @@ nav a.on{color:var(--ink)}
     <div class="legend" id="legend"></div>
   </section>
 
+  <section id="herramientas">
+    <h2>Herramientas</h2>
+    <p class="cap" style="margin-bottom:1.6rem">Aplicaciones que puedes probar desde esta misma web.</p>
+    <ul class="tools">
+      <li class="tool" style="--cc:var(--c-nlp)">
+        <h3><span class="dot"></span>PaperClaro AI</h3>
+        <p>Explica un artículo científico a partir de un PDF, un texto o un título, con el nivel y el enfoque que elijas. Funciona con tu propia clave de API o con modelos locales: ningún servidor intermedio ve tu clave ni tu texto.</p>
+        <div class="acts"><a class="btn pri" href="/paperclaro/">Abrir la aplicación</a><a class="btn" href="https://github.com/Potzon/paper-claro-ai">Ver repositorio en GitHub</a></div>
+      </li>
+    </ul>
+  </section>
+
   <section id="formacion">
     <h2>Formación y habilidades</h2>
     <div class="two" style="margin-bottom:3rem">
@@ -365,10 +389,10 @@ nav a.on{color:var(--ink)}
     <h2>Hablemos</h2>
     <p class="lede" style="margin-top:0">Estoy abierto a roles de ingeniero de IA y ML, y a proyectos de investigación con impacto real.</p>
     <div class="links">
-      <a href="mailto:gotzonviteri@gmail.com" id="copyEmail" data-email="gotzonviteri@gmail.com">Email</a>
-      <a href="https://linkedin.com/in/gotzonviteri">LinkedIn</a>
-      <a href="https://github.com/Potzon">GitHub</a>
-      <a href="Gotzon_Viteri_CV.pdf" download>CV (PDF)</a>
+      <a class="btn pri mail" href="mailto:gotzonviteri@gmail.com" id="copyEmail" data-email="gotzonviteri@gmail.com"><span>Email</span></a>
+      <a class="btn" href="https://linkedin.com/in/gotzonviteri"><span>LinkedIn</span></a>
+      <a class="btn" href="https://github.com/Potzon"><span>GitHub</span></a>
+      <a class="btn" href="Gotzon_Viteri_CV.pdf" download><span>CV (PDF)</span></a>
     </div>
     <small>Bilbao, España</small>
   </footer>
@@ -397,7 +421,7 @@ nav a.on{color:var(--ink)}
     {n:'madChess',c:'sw',d:'Oct 2023 – Mar 2024',s:[2023,10,2024,3],sum:'Ajedrez con reglas locas: partida local u online contra bot, en 1v1 o 2v2.',t:'Dos modos: clásico, con las reglas tradicionales, y madChess, donde cada jugador elige 3 piezas «alter» (movimientos y capturas modificados) y 3 «boosts» (hielo, bombas, minas, control…) que alteran la partida de forma dinámica.',r:'hjasier/madChess'}
   ];
   var EN={
-    "Experiencia":"Experience","Proyectos":"Projects","Formación":"Education","Contacto":"Contact",
+    "Experiencia":"Experience","Proyectos":"Projects","Herramientas":"Tools","Formación":"Education","Contacto":"Contact",
     "Activo":"Active",
     "Ingeniero de IA en Bilbao. Construyo sistemas de percepción y aprendizaje automático que funcionan":"AI engineer in Bilbao. I build perception and machine learning systems that run",
     "en el borde":"at the edge",
@@ -416,6 +440,10 @@ nav a.on{color:var(--ink)}
     "Desplegada con Docker y AWS.":"Deployed with Docker and AWS.",
     "Código en GitHub":"Code on GitHub",
     "Cronología":"Timeline",
+    "Aplicaciones que puedes probar desde esta misma web.":"Apps you can try right here on this site.",
+    "Explica un artículo científico a partir de un PDF, un texto o un título, con el nivel y el enfoque que elijas. Funciona con tu propia clave de API o con modelos locales: ningún servidor intermedio ve tu clave ni tu texto.":"Explains a scientific paper from a PDF, a text or a title, at the level and focus you choose. It works with your own API key or local models: no intermediate server sees your key or your text.",
+    "Abrir la aplicación":"Open the app",
+    "Ver repositorio en GitHub":"View repository on GitHub",
     "Formación y habilidades":"Education and skills",
     "Doble grado en Ingeniería Informática y Ciencia de Datos e IA":"Double Bachelor’s Degree in Computer Engineering and Data Science & AI",
     "Universidad de Deusto · 2022 – 2027 (previsto)":"University of Deusto · 2022 – 2027 (expected)",
@@ -511,8 +539,8 @@ nav a.on{color:var(--ink)}
       var isGist=p.r.indexOf('gist.github.com')!==-1;
       var href=p.r.indexOf('http')===0?p.r:'https://github.com/'+p.r;
       var label=LANG==='en'?(isGist?'View Gist on GitHub':'View repository on GitHub'):(isGist?'Ver Gist en GitHub':'Ver repositorio en GitHub');
-      var app=p.u?'<a href="'+p.u+'">'+(LANG==='en'?'Open the app':'Abrir la aplicación')+'</a>':'';
-      d.innerHTML='<button aria-expanded="false" aria-controls="'+id+'"><span class="date">'+pv(p,'d')+'</span><span><h3><span class="dot"></span>'+pv(p,'n')+'</h3><span class="sum">'+pv(p,'sum')+'</span></span><span class="plus" aria-hidden="true">+</span></button><div class="more" id="'+id+'"><div class="in"><p>'+pv(p,'t')+'</p>'+app+'<a href="'+href+'">'+label+'</a></div></div>';
+      var app=p.u?'<a class="btn pri" href="'+p.u+'">'+(LANG==='en'?'Open the app':'Abrir la aplicación')+'</a>':'';
+      d.innerHTML='<button aria-expanded="false" aria-controls="'+id+'"><span class="date">'+pv(p,'d')+'</span><span><h3><span class="dot"></span>'+pv(p,'n')+'</h3><span class="sum">'+pv(p,'sum')+'</span></span><span class="plus" aria-hidden="true">+</span></button><div class="more" id="'+id+'"><div class="in"><p>'+pv(p,'t')+'</p>'+app+'<a class="btn" href="'+href+'">'+label+'</a></div></div>';
       var b=d.firstChild;
       b.onclick=function(){var o=d.classList.toggle('open');b.setAttribute('aria-expanded',o)};
       if(stag){d.style.animationDelay=(i*45)+'ms';d.classList.add('enter')}
@@ -619,16 +647,17 @@ nav a.on{color:var(--ink)}
   (function(){
     var link=document.getElementById('copyEmail');
     if(!link)return;
+    var txt=link.querySelector('span');
     var timer;
     link.addEventListener('click',function(e){
       e.preventDefault();
       var email=link.dataset.email;
       function showFeedback(){
         clearTimeout(timer);
-        link.textContent=LANG==='en'?'Email copied!':'¡Email copiado!';
+        txt.textContent=LANG==='en'?'Email copied!':'¡Email copiado!';
         link.classList.add('copied');
         timer=setTimeout(function(){
-          link.textContent='Email';
+          txt.textContent='Email';
           link.classList.remove('copied');
         },2000);
       }
@@ -686,7 +715,7 @@ nav a.on{color:var(--ink)}
         if(e.isIntersecting){for(var k in links)links[k].classList.toggle('on',k===e.target.id)}
       });
     },{rootMargin:'-40% 0px -55% 0px'});
-    ['experiencia','proyectos','formacion','contacto'].forEach(function(id){var s=document.getElementById(id);if(s)so.observe(s)});
+    ['experiencia','proyectos','herramientas','formacion','contacto'].forEach(function(id){var s=document.getElementById(id);if(s)so.observe(s)});
   }
 
   applyLang();

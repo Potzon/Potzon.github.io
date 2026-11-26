@@ -269,7 +269,7 @@ nav a.on{color:var(--ink)}
 </head>
 <body>
 <a class="skip" href="#top">Saltar al contenido</a>
-<noscript><style>.skills[hidden]{display:grid}.flow,.tl,#filters{display:none}</style><div class="wrap"><p class="cap" style="margin:1rem 0">Esta web necesita JavaScript para mostrar la lista de proyectos, la cronología y el stack. Mientras tanto, puedes ver mi trabajo en <a href="https://github.com/Potzon">GitHub</a> o en <a href="https://linkedin.com/in/gotzonviteri">LinkedIn</a>.</p></div></noscript>
+<noscript><style>.skills[hidden]{display:grid}.flow,.tl,#filters{display:none}</style><div class="wrap"><p class="cap" style="margin:1rem 0">Esta web necesita JavaScript para mostrar la lista de proyectos, la cronología y el stack. Mientras tanto, puedes ver mi trabajo en <a href="https://github.com/Potzon" target="_blank" rel="noopener">GitHub</a> o en <a href="https://linkedin.com/in/gotzonviteri" target="_blank" rel="noopener">LinkedIn</a>.</p></div></noscript>
 <div class="wrap">
   <nav aria-label="Principal">
     <a class="me" href="#top">Gotzon Viteri</a>
@@ -313,7 +313,7 @@ nav a.on{color:var(--ink)}
         <ul>
           <li>Admite varios LLM, skills e interacción multimodal.</li>
           <li>Desplegada con Docker y AWS.</li>
-          <li><a href="https://github.com/iaud-tech/boti-open-webui">Código en GitHub</a></li>
+          <li><a href="https://github.com/iaud-tech/boti-open-webui" target="_blank" rel="noopener">Código en GitHub</a></li>
         </ul>
       </article>
     </div>
@@ -336,7 +336,7 @@ nav a.on{color:var(--ink)}
       <li class="tool" style="--cc:var(--c-nlp)">
         <h3><span class="dot"></span>PaperClaro AI</h3>
         <p>Explica un artículo científico a partir de un PDF, un texto o un título, con el nivel y el enfoque que elijas. Funciona con tu propia clave de API o con modelos locales: ningún servidor intermedio ve tu clave ni tu texto.</p>
-        <div class="acts"><a class="btn pri" href="/paperclaro/">Abrir la aplicación</a><a class="btn" href="https://github.com/Potzon/paper-claro-ai">Ver repositorio en GitHub</a></div>
+        <div class="acts"><a class="btn pri" href="/paperclaro/" target="_blank" rel="noopener">Abrir la aplicación</a><a class="btn" href="https://github.com/Potzon/paper-claro-ai" target="_blank" rel="noopener">Ver repositorio en GitHub</a></div>
       </li>
     </ul>
   </section>
@@ -390,8 +390,8 @@ nav a.on{color:var(--ink)}
     <p class="lede" style="margin-top:0">Estoy abierto a roles de ingeniero de IA y ML, y a proyectos de investigación con impacto real.</p>
     <div class="links">
       <a class="btn pri mail" href="mailto:gotzonviteri@gmail.com" id="copyEmail" data-email="gotzonviteri@gmail.com"><span>Email</span></a>
-      <a class="btn" href="https://linkedin.com/in/gotzonviteri"><span>LinkedIn</span></a>
-      <a class="btn" href="https://github.com/Potzon"><span>GitHub</span></a>
+      <a class="btn" href="https://linkedin.com/in/gotzonviteri" target="_blank" rel="noopener"><span>LinkedIn</span></a>
+      <a class="btn" href="https://github.com/Potzon" target="_blank" rel="noopener"><span>GitHub</span></a>
       <a class="btn" href="Gotzon_Viteri_CV.pdf" download><span>CV (PDF)</span></a>
     </div>
     <small>Bilbao, España</small>
@@ -539,8 +539,8 @@ nav a.on{color:var(--ink)}
       var isGist=p.r.indexOf('gist.github.com')!==-1;
       var href=p.r.indexOf('http')===0?p.r:'https://github.com/'+p.r;
       var label=LANG==='en'?(isGist?'View Gist on GitHub':'View repository on GitHub'):(isGist?'Ver Gist en GitHub':'Ver repositorio en GitHub');
-      var app=p.u?'<a class="btn pri" href="'+p.u+'">'+(LANG==='en'?'Open the app':'Abrir la aplicación')+'</a>':'';
-      d.innerHTML='<button aria-expanded="false" aria-controls="'+id+'"><span class="date">'+pv(p,'d')+'</span><span><h3><span class="dot"></span>'+pv(p,'n')+'</h3><span class="sum">'+pv(p,'sum')+'</span></span><span class="plus" aria-hidden="true">+</span></button><div class="more" id="'+id+'"><div class="in"><p>'+pv(p,'t')+'</p>'+app+'<a class="btn" href="'+href+'">'+label+'</a></div></div>';
+      var app=p.u?'<a class="btn pri" href="'+p.u+'" target="_blank" rel="noopener">'+(LANG==='en'?'Open the app':'Abrir la aplicación')+'</a>':'';
+      d.innerHTML='<button aria-expanded="false" aria-controls="'+id+'"><span class="date">'+pv(p,'d')+'</span><span><h3><span class="dot"></span>'+pv(p,'n')+'</h3><span class="sum">'+pv(p,'sum')+'</span></span><span class="plus" aria-hidden="true">+</span></button><div class="more" id="'+id+'"><div class="in"><p>'+pv(p,'t')+'</p>'+app+'<a class="btn" href="'+href+'" target="_blank" rel="noopener">'+label+'</a></div></div>';
       var b=d.firstChild;
       b.onclick=function(){var o=d.classList.toggle('open');b.setAttribute('aria-expanded',o)};
       if(stag){d.style.animationDelay=(i*45)+'ms';d.classList.add('enter')}
